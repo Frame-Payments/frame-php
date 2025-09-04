@@ -1,27 +1,25 @@
 <?php
 
-namespace Frame; // Updated namespace
+namespace Frame;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
-use Frame\Auth;        // Updated namespace
-use Frame\Response;    // Updated namespace
-use Frame\Exception;   // Updated namespace
+use Frame\Auth;
+use Frame\Response;
+use Frame\Exception;
 
-class Client
-{
+final class Client {
     private static $client;
 
     private static function getClient()
     {
         if (!self::$client) {
             self::$client = new GuzzleClient([
-                'base_uri' => 'https://api.framepayments.com', // Updated Base URI
-
+                'base_uri' => 'https://api.framepayments.com',
                 'headers' => [
-                    'User-Agent' => 'Frame PHP SDK 1.0.0',        // Updated User-Agent
+                    'User-Agent' => 'Frame PHP SDK 1.0.0',
                     'Authorization' => 'Bearer ' . Auth::getApiKey(),
-                    'Accept' => 'application/json',               // Updated if required by Frame Payments API
+                    'Accept' => 'application/json',
 
                 ],
             ]);
@@ -35,15 +33,15 @@ class Client
         try {
             $response = self::getClient()->post($endpoint, [
                 'json' => $body,
-
                 'headers' => [
-                    'Content-Type' => 'application/json'   // Updated Content-Type
+                    'Content-Type' => 'application/json'
                 ]
-
             ]);
             return (new Response($response))->toObject();
         } catch (RequestException $e) {
-            throw new Exception($e->getResponse()->getBody()->getContents()); // Uses updated Exception class
+            $resp = $e->getResponse();
+            $msg  = $resp ? (string)$resp->getBody() : $e->getMessage();
+            throw new Exception($msg, previous: $e);
         }
     }
 
@@ -53,22 +51,26 @@ class Client
             $response = self::getClient()->get($endpoint, ['query' => $body]);
             return (new Response($response))->toObject();
         } catch (RequestException $e) {
-            throw new Exception($e->getResponse()->getBody()->getContents());
+            $resp = $e->getResponse();
+            $msg  = $resp ? (string)$resp->getBody() : $e->getMessage();
+            throw new Exception($msg, previous: $e);
         }
     }
 
     public static function update($endpoint, $body = [])
     {
         try {
-            $response = self::getClient()->patch($endpoint, [    // Changed 'put' to 'patch'
+            $response = self::getClient()->patch($endpoint, [ 
                 'json' => $body,
                 'headers' => [
-                    'Content-Type' => 'application/json'   // Updated Content-Type
+                    'Content-Type' => 'application/json' 
                 ]
             ]);
             return (new Response($response))->toObject();
         } catch (RequestException $e) {
-            throw new Exception($e->getResponse()->getBody()->getContents());
+            $resp = $e->getResponse();
+            $msg  = $resp ? (string)$resp->getBody() : $e->getMessage();
+            throw new Exception($msg, previous: $e);
         }
     }
 
@@ -78,7 +80,9 @@ class Client
             $response = self::getClient()->delete($endpoint, ['json' => $body]);
             return (new Response($response))->toObject();
         } catch (RequestException $e) {
-            throw new Exception($e->getResponse()->getBody()->getContents());
+            $resp = $e->getResponse();
+            $msg  = $resp ? (string)$resp->getBody() : $e->getMessage();
+            throw new Exception($msg, previous: $e);
         }
     }
 }
