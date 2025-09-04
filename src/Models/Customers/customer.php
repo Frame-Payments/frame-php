@@ -35,7 +35,7 @@ final class Customer implements \JsonSerializable {
             email: $p['email'],
             phone: $p['phone'],
             dateOfBirth: $p['date_of_birth'],
-            metadata: (array)$p['metadata'],
+            metadata: isset($p['metadata']) && is_array($p['metadata']) ? $p['metadata'] : [],
             livemode: (bool)$p['livemode'],
             created: (int)$p['created'],
             updated: isset($p['updated']) ? (int)$p['updated'] : null,

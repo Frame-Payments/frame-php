@@ -6,6 +6,7 @@ namespace Frame\Endpoints;
 use Frame\Client;
 use Frame\Models\ChargeIntents\ChargeIntent;
 use Frame\Models\ChargeIntents\ChargeIntentCreateRequest;
+use Frame\Models\ChargeIntents\ChargeIntentListResponse;
 use Frame\Models\ChargeIntents\ChargeIntentUpdateRequest;
 
 final class ChargeIntents {
@@ -32,7 +33,7 @@ final class ChargeIntents {
         $json  = Client::get($this->basePath, ['per_page' => $perPage, 'page' => $page]);
         $data  = isset($json['data']) && is_array($json['data']) ? $json['data'] : [];
         $items = array_map(
-            fn(array $i) => ChargeIntent::fromArray($i),
+            fn(array $i) => ChargeIntentListResponse::fromArray($i),
             $data
         );
         return $items;
