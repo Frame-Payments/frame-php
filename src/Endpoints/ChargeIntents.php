@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Frame\Endpoints;
 
-
 use Frame\Client;
 use Frame\Models\ChargeIntents\ChargeIntent;
 use Frame\Models\ChargeIntents\ChargeIntentCreateRequest;
@@ -28,7 +27,6 @@ final class ChargeIntents {
         return ChargeIntent::fromArray($json);
     }
 
-    // TODO: Fix this to be a ChargeIntentListResponse
     public function list(int $perPage = 10, int $page = 1): array {
         $json  = Client::get($this->basePath, ['per_page' => $perPage, 'page' => $page]);
         $data  = isset($json['data']) && is_array($json['data']) ? $json['data'] : [];
