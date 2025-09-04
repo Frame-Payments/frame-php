@@ -6,6 +6,7 @@ use Frame\Client;
 use Frame\Models\ChargeIntents\ChargeIntent;
 use Frame\Models\ChargeIntents\ChargeIntentCreateRequest;
 use Frame\Models\ChargeIntents\ChargeIntentListResponse;
+use Frame\Models\ChargeIntents\ChargeIntentStatus;
 use Frame\Models\ChargeIntents\ChargeIntentUpdateRequest;
 
 final class ChargeIntents {
@@ -27,14 +28,9 @@ final class ChargeIntents {
         return ChargeIntent::fromArray($json);
     }
 
-    public function list(int $perPage = 10, int $page = 1): array {
+    public function list(int $perPage = 10, int $page = 1): ChargeIntentListResponse {
         $json  = Client::get($this->basePath, ['per_page' => $perPage, 'page' => $page]);
-        $data  = isset($json['data']) && is_array($json['data']) ? $json['data'] : [];
-        $items = array_map(
-            fn(array $i) => ChargeIntentListResponse::fromArray($i),
-            $data
-        );
-        return $items;
+        return ChargeIntentListResponse::fromArray($json);
     }
 
     public function confirm(string $id, array $params = []): ChargeIntent {
