@@ -29,7 +29,7 @@ final class Customers {
     }
 
     public function delete(string $id): Customer {
-        $json = Client::delete(self::BASE_PATH . "/{$id}/block");
+        $json = Client::delete(self::BASE_PATH . "/{$id}");
         return Customer::fromArray($json);
     }
 
