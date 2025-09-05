@@ -6,45 +6,44 @@ use Frame\Client;
 use Frame\Models\ChargeIntents\ChargeIntent;
 use Frame\Models\ChargeIntents\ChargeIntentCreateRequest;
 use Frame\Models\ChargeIntents\ChargeIntentListResponse;
-use Frame\Models\ChargeIntents\ChargeIntentStatus;
 use Frame\Models\ChargeIntents\ChargeIntentUpdateRequest;
 
 final class ChargeIntents {
-    private string $basePath = '/v1/charge_intents';
+    private const BASE_PATH = '/v1/charge_intents';
 
     public function create(ChargeIntentCreateRequest $params): ChargeIntent
     {
-        $json = Client::create($this->basePath, $params);
+        $json = Client::create(self::BASE_PATH, $params);
         return ChargeIntent::fromArray($json);
     }
 
     public function update(string $id, ChargeIntentUpdateRequest $params): ChargeIntent {
-        $json = Client::update("{$this->basePath}/{$id}", $params);
+        $json = Client::update(self::BASE_PATH . "/{$id}", $params);
         return ChargeIntent::fromArray($json);
     }
 
     public function retrieve(string $id): ChargeIntent {
-        $json = Client::get("{$this->basePath}/{$id}");
+        $json = Client::get(self::BASE_PATH . "/{$id}");
         return ChargeIntent::fromArray($json);
     }
 
     public function list(int $perPage = 10, int $page = 1): ChargeIntentListResponse {
-        $json  = Client::get($this->basePath, ['per_page' => $perPage, 'page' => $page]);
+        $json  = Client::get(self::BASE_PATH, ['per_page' => $perPage, 'page' => $page]);
         return ChargeIntentListResponse::fromArray($json);
     }
 
     public function confirm(string $id, array $params = []): ChargeIntent {
-        $json = Client::create("{$this->basePath}/{$id}/confirm", $params);
+        $json = Client::create(self::BASE_PATH . "/{$id}/confirm", $params);
         return ChargeIntent::fromArray($json);
     }
 
     public function capture(string $id, array $params = []): ChargeIntent {
-        $json = Client::create("{$this->basePath}/{$id}/capture", $params);
+        $json = Client::create(self::BASE_PATH . "/{$id}/capture", $params);
         return ChargeIntent::fromArray($json);
     }
 
     public function cancel(string $id, array $params = []): ChargeIntent {
-        $json = Client::create("{$this->basePath}/{$id}/cancel", $params);
+        $json = Client::create(self::BASE_PATH . "/{$id}/cancel", $params);
         return ChargeIntent::fromArray($json);
     }
 }
