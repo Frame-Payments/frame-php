@@ -7,19 +7,19 @@ final class CustomerCreateRequest implements \JsonSerializable
         public readonly string $name,
         public readonly ?string $description = null,
         public readonly string $email,
-        public readonly ?string $phone,
-        public readonly ?string $ssn,
-        public readonly ?string $dateOfBirth,
+        public readonly ?string $phone = null,
+        public readonly ?string $ssn = null,
+        public readonly ?string $dateOfBirth = null,
         /** @var array<string,string>|null */
         public readonly ?array $metadata = null,
-        public readonly ?Address $billingAddress,
-        public readonly ?Address $shippingAddress,
+        public readonly ?Address $billingAddress = null,
+        public readonly ?Address $shippingAddress = null,
     ){}
 
     public function jsonSerialize(): array
     {
         $out = [
-            'name'   => $this->name,
+            'name' => $this->name,
             'email' => $this->email,
         ];
         if ($this->description !== null) $out['description'] = $this->description;

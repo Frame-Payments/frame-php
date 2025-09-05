@@ -4,16 +4,16 @@ namespace Frame\Models\Customers;
 final class CustomerUpdateRequest implements \JsonSerializable
 {
     public function __construct(
-        public readonly ?string $name,
+        public readonly ?string $name = null,
         public readonly ?string $description = null,
-        public readonly ?string $email,
-        public readonly ?string $phone,
-        public readonly ?string $ssn,
-        public readonly ?string $dateOfBirth,
+        public readonly ?string $email = null,
+        public readonly ?string $phone = null,
+        public readonly ?string $ssn = null,
+        public readonly ?string $dateOfBirth = null,
         /** @var array<string,string>|null */
         public readonly ?array $metadata = null,
-        public readonly ?Address $billingAddress,
-        public readonly ?Address $shippingAddress,
+        public readonly ?Address $billingAddress = null,
+        public readonly ?Address $shippingAddress = null,
     ){}
 
     public function jsonSerialize(): array

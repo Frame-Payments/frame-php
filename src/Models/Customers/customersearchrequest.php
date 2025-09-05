@@ -4,11 +4,11 @@ namespace Frame\Models\Customers;
 final class CustomerSearchRequest implements \JsonSerializable
 {
     public function __construct(
-        public readonly ?string $name,
-        public readonly ?string $email,
-        public readonly ?string $phone,
-        public readonly ?int $createdBefore,
-        public readonly ?int $createdAfter
+        public readonly ?string $name = null,
+        public readonly ?string $email = null,
+        public readonly ?string $phone = null,
+        public readonly ?int $createdBefore = null,
+        public readonly ?int $createdAfter = null
     ){}
 
     public function jsonSerialize(): array
