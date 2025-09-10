@@ -1,7 +1,7 @@
 {
     "name": "framepayments/php-sdk",
     "require": {
-      "php": "^7.3||^8.0",
+      "php": "^8.1",
       "guzzlehttp/guzzle": "^7.0",
         "league/iso3166": "^4.3"
     },

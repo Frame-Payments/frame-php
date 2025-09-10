@@ -33,7 +33,7 @@ final class Customers {
         return Customer::fromArray($json);
     }
 
-    public function list(int $perPage = 20, int $page = 1): CustomerListResponse {
+    public function list(int $perPage = 10, int $page = 1): CustomerListResponse {
         $json  = Client::get(self::BASE_PATH, ['per_page' => $perPage, 'page' => $page]);
         return CustomerListResponse::fromArray($json);
     }
