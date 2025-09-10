@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Frame\Models\PaymentMethods;
 
 use Frame\Models\Customers\Address;

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Frame\Models\Customers;
 
 final class CustomerUpdateRequest implements \JsonSerializable

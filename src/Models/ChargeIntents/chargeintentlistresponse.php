@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Frame\Models\ChargeIntents;
 
 final class ChargeIntentListResponse implements \JsonSerializable {
