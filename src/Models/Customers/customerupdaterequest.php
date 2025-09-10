@@ -19,6 +19,8 @@ final class CustomerUpdateRequest implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
+        $out = [];
+        
         if ($this->name !== null) $out['name'] = $this->name;
         if ($this->email !== null) $out['email'] = $this->email;
         if ($this->description !== null) $out['description'] = $this->description;
