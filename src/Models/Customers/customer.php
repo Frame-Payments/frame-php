@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Frame\Models\Customers;
 
 use Frame\Models\PaymentMethods\PaymentMethod;
@@ -30,7 +31,7 @@ final class Customer implements \JsonSerializable {
             shippingAddress: isset($p['shipping_address']) && is_array($p['shipping_address']) ? Address::fromArray($p['shipping_address']) : null,
             name: $p['name'],
             status: CustomerStatus::from($p['status']),
-            paymentMethods: isset($p['payment_methods']) ? array_map(fn($pm) => PaymentMethod::fromArray($pm), $p['payment_methods']) : null,
+            paymentMethods: isset($p['payment_methods']) && is_array($p['payment_methods']) ? array_map(fn($pm) => PaymentMethod::fromArray($pm), $p['payment_methods']) : [],
             description: $p['description'] ?? null,
             email: $p['email'],
             phone: $p['phone'],
