@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 namespace Frame\Models\ChargeIntents;
 
 final class ChargeIntentUpdateRequest implements \JsonSerializable
 {
     public function __construct(
-        public readonly int $amount,
+        public readonly ?int $amount,
         public readonly ?string $customer = null,
         public readonly ?string $description = null,
         public readonly ?string $paymentMethod = null,
@@ -14,6 +15,8 @@ final class ChargeIntentUpdateRequest implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
+        $out = [];
+
         if ($this->amount !== null) $out['amount'] = $this->amount;
         if ($this->customer !== null) $out['customer'] = $this->customer;
         if ($this->metadata !== null) $out['metadata'] = $this->metadata;
