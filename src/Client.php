@@ -4,9 +4,6 @@ namespace Frame;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
-use Frame\Auth;
-use Frame\Response;
-use Frame\Exception;
 
 final class Client {
     private static $client;
@@ -20,7 +17,6 @@ final class Client {
                     'User-Agent' => 'Frame PHP SDK 1.0.0',
                     'Authorization' => 'Bearer ' . Auth::getApiKey(),
                     'Accept' => 'application/json',
-
                 ],
             ]);
         }
@@ -28,61 +24,48 @@ final class Client {
         return self::$client;
     }
 
-    public static function create($endpoint, $body = [])
+    private static function request(string $method, string $endpoint, array $body = [])
     {
+        $options = [];
+        if (!empty($body)) {
+            if ($method === 'GET') {
+                $options['query'] = $body;
+            } else {
+                $options['json'] = $body;
+                $options['headers']['Content-Type'] = 'application/json';
+            }
+        }
+
         try {
-            $response = self::getClient()->post($endpoint, [
-                'json' => $body,
-                'headers' => [
-                    'Content-Type' => 'application/json'
-                ]
-            ]);
-            return (new Response($response))->toObject();
+            $response = self::getClient()->request($method, $endpoint, $options);
+            return json_decode((string)$response->getBody(), true);
         } catch (RequestException $e) {
-            $resp = $e->getResponse();
-            $msg  = $resp ? (string)$resp->getBody() : $e->getMessage();
-            throw new Exception($msg, previous: $e);
+            $response = $e->getResponse();
+            if ($response) {
+                $errorBody = json_decode((string)$response->getBody(), true);
+                throw Exception::fromResponse($errorBody);
+            }
+            throw new Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
-    public static function get($endpoint, $body = [])
+    public static function create(string $endpoint, array $body = [])
     {
-        try {
-            $response = self::getClient()->get($endpoint, ['query' => $body]);
-            return (new Response($response))->toObject();
-        } catch (RequestException $e) {
-            $resp = $e->getResponse();
-            $msg  = $resp ? (string)$resp->getBody() : $e->getMessage();
-            throw new Exception($msg, previous: $e);
-        }
+        return self::request('POST', $endpoint, $body);
     }
 
-    public static function update($endpoint, $body = [])
+    public static function get(string $endpoint, array $query = [])
     {
-        try {
-            $response = self::getClient()->patch($endpoint, [ 
-                'json' => $body,
-                'headers' => [
-                    'Content-Type' => 'application/json' 
-                ]
-            ]);
-            return (new Response($response))->toObject();
-        } catch (RequestException $e) {
-            $resp = $e->getResponse();
-            $msg  = $resp ? (string)$resp->getBody() : $e->getMessage();
-            throw new Exception($msg, previous: $e);
-        }
+        return self::request('GET', $endpoint, $query);
     }
 
-    public static function delete($endpoint, $body = [])
+    public static function update(string $endpoint, array $body = [])
     {
-        try {
-            $response = self::getClient()->delete($endpoint, ['json' => $body]);
-            return (new Response($response))->toObject();
-        } catch (RequestException $e) {
-            $resp = $e->getResponse();
-            $msg  = $resp ? (string)$resp->getBody() : $e->getMessage();
-            throw new Exception($msg, previous: $e);
-        }
+        return self::request('PATCH', $endpoint, $body);
+    }
+
+    public static function delete(string $endpoint, array $body = [])
+    {
+        return self::request('DELETE', $endpoint, $body);
     }
 }

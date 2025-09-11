@@ -27,8 +27,13 @@ class Exception extends \Exception
 
     public static function getErrorMessage(Exception $e)
     {
-        $decodedMessage = json_decode($e->getMessage());
+        $message = $e->getMessage();
+        $decoded = json_decode($message, true);
 
-        return $decodedMessage->errors['0']->detail;
+        if (json_last_error() === JSON_ERROR_NONE && isset($decoded['errors'][0]['detail'])) {
+            return $decoded['errors'][0]['detail'];
+        }
+
+        return $message;
     }
 }

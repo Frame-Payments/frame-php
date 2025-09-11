@@ -67,6 +67,49 @@ The SDK also includes a `Helpers` class with useful methods. For example, you ca
 $alpha3 = Frame\Helpers::convertAlpha2ToAlpha3('US');
 ```
 
+## Testing
+
+The SDK includes a comprehensive test suite using PHPUnit. To run the tests:
+
+### Prerequisites
+- PHP 8.1 or higher
+- Composer
+- Docker (for containerized testing)
+
+### Running Tests
+
+#### Option 1: Using Docker (Recommended)
+```bash
+# Build the test image
+docker build -t frame-php-sdk-tests .
+
+# Run all tests
+docker run --rm frame-php-sdk-tests ./vendor/bin/phpunit
+
+# Run tests with pretty output
+docker run --rm frame-php-sdk-tests ./vendor/bin/phpunit --testdox
+
+# Run specific test suites
+docker run --rm frame-php-sdk-tests ./vendor/bin/phpunit tests/Unit/
+docker run --rm frame-php-sdk-tests ./vendor/bin/phpunit tests/Integration/
+```
+
+#### Option 2: Local PHP/Composer
+```bash
+# Install dependencies
+composer install
+
+# Run all tests
+composer test
+# or
+./vendor/bin/phpunit
+
+# Run tests with coverage
+composer test-coverage
+# or
+./vendor/bin/phpunit --coverage-html coverage
+```
+
 ## Contributing
 
 Contributions are welcome. Please submit a pull request or create an issue if you have any improvements or find any bugs.

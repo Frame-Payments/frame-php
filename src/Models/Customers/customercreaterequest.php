@@ -6,8 +6,8 @@ final class CustomerCreateRequest implements \JsonSerializable
 {
     public function __construct(
         public readonly string $name,
-        public readonly ?string $description = null,
         public readonly string $email,
+        public readonly ?string $description = null,
         public readonly ?string $phone = null,
         public readonly ?string $ssn = null,
         public readonly ?string $dateOfBirth = null,

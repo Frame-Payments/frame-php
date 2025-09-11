@@ -3,18 +3,19 @@ declare(strict_types=1);
 namespace Frame\Models\ChargeIntents;
 
 use Frame\Models\PaymentMethods\PaymentMethodData;
+use Frame\Models\ChargeIntents\AuthorizationMode;
 
 final class ChargeIntentCreateRequest implements \JsonSerializable
 {
     public function __construct(
         public readonly int $amount,
         public readonly string $currency,
+        public readonly ?string $description = null,
         public readonly ?string $customer = null,
         public readonly ?bool $confirm = null,
         public readonly ?PaymentMethodData $paymentMethodData = null,
         /** @var array<string,string>|null */
         public readonly ?array $metadata = null,
-        public readonly ?string $description = null,
         public readonly ?AuthorizationMode $authorizationMode = null,
     ) {
         if ($this->amount <= 0) {
