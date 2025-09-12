@@ -13,16 +13,22 @@ final class ChargeIntentUpdateRequest implements \JsonSerializable
         public readonly ?array $metadata = null
     ) {}
 
+    public function toArray(): array
+    {
+        $payload = [
+            'amount'   => $this->amount,
+            'description' => $this->description,
+            'customer' => $this->customer,
+            'payment_method' => $this->paymentMethod,
+            'metadata' => $this->metadata
+        ];
+
+        $filterNulls = fn($v) => $v !== null;
+        return array_filter($payload, $filterNulls);
+    }
+
     public function jsonSerialize(): array
     {
-        $out = [];
-
-        if ($this->amount !== null) $out['amount'] = $this->amount;
-        if ($this->customer !== null) $out['customer'] = $this->customer;
-        if ($this->metadata !== null) $out['metadata'] = $this->metadata;
-        if ($this->description !== null) $out['description'] = $this->description;
-        if ($this->paymentMethod !== null) $out['payment_method'] = $this->paymentMethod;
-
-        return $out;
+        return $this->toArray();
     }
 }

@@ -23,19 +23,25 @@ final class ChargeIntentCreateRequest implements \JsonSerializable
         }
     }
 
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $out = [
+        $payload = [
             'amount'   => $this->amount,
             'currency' => $this->currency,
+            'description' => $this->description,
+            'customer' => $this->customer,
+            'confirm' => $this->confirm,
+            'payment_method_data' => $this->paymentMethodData?->toArray(),
+            'metadata' => $this->metadata,
+            'authorization_mode' => $this->authorizationMode?->value,
         ];
-        if ($this->customer !== null) $out['customer'] = $this->customer;
-        if ($this->confirm !== null) $out['confirm'] = $this->confirm;
-        if ($this->paymentMethodData !== null) $out['payment_method_data'] = $this->paymentMethodData;
-        if ($this->metadata !== null) $out['metadata'] = $this->metadata;
-        if ($this->description !== null) $out['description'] = $this->description;
-        if ($this->authorizationMode !== null) $out['authorization_mode'] = $this->authorizationMode->value;
 
-        return $out;
+        $filterNulls = fn($v) => $v !== null;
+        return array_filter($payload, $filterNulls);
+    }
+
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }
