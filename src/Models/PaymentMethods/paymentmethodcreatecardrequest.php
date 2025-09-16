@@ -7,7 +7,7 @@ use Frame\Models\Customers\Address;
 final class PaymentMethodCreateCardRequest implements \JsonSerializable
 {
     public function __construct(
-        public readonly string $type,
+        public readonly string $type = 'card',
         public readonly ?string $customer,
         public readonly string $cardNumber,
         public readonly string $expMonth,
@@ -19,7 +19,7 @@ final class PaymentMethodCreateCardRequest implements \JsonSerializable
     public function toArray(): array
     {
         $payload = [
-            'type' => 'card',
+            'type' => $this->type,
             'card_number' => $this->cardNumber,
             'exp_month' => $this->expMonth,
             'exp_year' => $this->expYear,

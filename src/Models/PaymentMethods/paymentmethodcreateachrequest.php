@@ -7,7 +7,7 @@ use Frame\Models\Customers\Address;
 final class PaymentMethodCreateACHRequest implements \JsonSerializable
 {
     public function __construct(
-        public readonly string $type,
+        public readonly string $type = 'ach',
         public readonly ?string $customer,
         public readonly string $accountType,
         public readonly string $accountNumber,
@@ -18,7 +18,7 @@ final class PaymentMethodCreateACHRequest implements \JsonSerializable
     public function toArray(): array
     {
         $payload = [
-            'type' => 'ach',
+            'type' => $this->type,
             'account_type' => $this->accountType,
             'account_number' => $this->accountNumber,
             'routing_number' => $this->routingNumber,

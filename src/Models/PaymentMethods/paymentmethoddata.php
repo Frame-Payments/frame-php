@@ -44,7 +44,7 @@ final class PaymentMethodData implements \JsonSerializable {
     public function toArray(): array
     {
         $payload = [
-            'type' => $this->type?->value,
+            'type' => $this->type->value,
             'card_number' => $this->cardNumber,
             'exp_month' => $this->expMonth,
             'exp_year' => $this->expYear,
