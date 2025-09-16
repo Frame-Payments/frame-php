@@ -35,7 +35,7 @@ final class PaymentMethods {
     }
 
     public function retrieveForCustomer(string $customer, int $perPage = 10, int $page = 1): PaymentMethodListResponse {
-        $json  = Client::get('/v1/customers/{$customer}/payment_methods', ['per_page' => $perPage, 'page' => $page]);
+        $json  = Client::get("/v1/customers/{$customer}/payment_methods", ['per_page' => $perPage, 'page' => $page]);
         return PaymentMethodListResponse::fromArray($json);
     }
 
