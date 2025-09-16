@@ -12,7 +12,8 @@ final class Address implements \JsonSerializable {
          public readonly ?string $line2
      ){}
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self 
+    {
         return new self(
             city: $p['city'] ?? null,
             country: $p['country'] ?? null,
@@ -23,8 +24,9 @@ final class Address implements \JsonSerializable {
         );
     }
 
-     public function jsonSerialize(): array {
-        return [
+    public function toArray(): array
+    {
+        $payload = [
             'city' => $this->city,
             'country' => $this->country,
             'state' => $this->state,
@@ -32,5 +34,13 @@ final class Address implements \JsonSerializable {
             'line_1' => $this->line1,
             'line_2' => $this->line2
         ];
+
+        $filterNulls = fn($v) => $v !== null;
+        return array_filter($payload, $filterNulls);
+    }
+
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

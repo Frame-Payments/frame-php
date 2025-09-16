@@ -12,16 +12,22 @@ final class CustomerSearchRequest implements \JsonSerializable
         public readonly ?int $createdAfter = null
     ){}
 
+    public function toArray(): array
+    {
+        $payload = [
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'created_before' => $this->createdBefore,
+            'created_after' => $this->createdAfter
+        ];
+
+        $filterNulls = fn($v) => $v !== null;
+        return array_filter($payload, $filterNulls);
+    }
+
     public function jsonSerialize(): array
     {
-        $out = [];
-        
-        if ($this->name !== null) $out['name'] = $this->name;
-        if ($this->email !== null) $out['email'] = $this->email;
-        if ($this->phone !== null) $out['phone'] = $this->phone;
-        if ($this->createdBefore !== null) $out['created_before'] = $this->createdBefore;
-        if ($this->createdAfter !== null) $out['created_after'] = $this->createdAfter;
-
-        return $out;
+        return $this->toArray();
     }
 }

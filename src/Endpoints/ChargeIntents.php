@@ -13,12 +13,12 @@ final class ChargeIntents {
 
     public function create(ChargeIntentCreateRequest $params): ChargeIntent
     {
-        $json = Client::create(self::BASE_PATH, $params);
+        $json = Client::create(self::BASE_PATH, $params->toArray());
         return ChargeIntent::fromArray($json);
     }
 
     public function update(string $id, ChargeIntentUpdateRequest $params): ChargeIntent {
-        $json = Client::update(self::BASE_PATH . "/{$id}", $params);
+        $json = Client::update(self::BASE_PATH . "/{$id}", $params->toArray());
         return ChargeIntent::fromArray($json);
     }
 
@@ -32,18 +32,18 @@ final class ChargeIntents {
         return ChargeIntentListResponse::fromArray($json);
     }
 
-    public function confirm(string $id, array $params = []): ChargeIntent {
-        $json = Client::create(self::BASE_PATH . "/{$id}/confirm", $params);
+    public function confirm(string $id): ChargeIntent {
+        $json = Client::create(self::BASE_PATH . "/{$id}/confirm", []);
         return ChargeIntent::fromArray($json);
     }
 
-    public function capture(string $id, array $params = []): ChargeIntent {
-        $json = Client::create(self::BASE_PATH . "/{$id}/capture", $params);
+    public function capture(string $id): ChargeIntent {
+        $json = Client::create(self::BASE_PATH . "/{$id}/capture", []);
         return ChargeIntent::fromArray($json);
     }
 
-    public function cancel(string $id, array $params = []): ChargeIntent {
-        $json = Client::create(self::BASE_PATH . "/{$id}/cancel", $params);
+    public function cancel(string $id): ChargeIntent {
+        $json = Client::create(self::BASE_PATH . "/{$id}/cancel", []);
         return ChargeIntent::fromArray($json);
     }
 }

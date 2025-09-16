@@ -17,20 +17,26 @@ final class CustomerUpdateRequest implements \JsonSerializable
         public readonly ?Address $shippingAddress = null,
     ){}
 
+    public function toArray(): array
+    {
+        $payload = [
+            'name' => $this->name,
+            'email' => $this->email,
+            'description' => $this->description,
+            'phone' => $this->phone,
+            'ssn' => $this->ssn,
+            'date_of_birth' => $this->dateOfBirth,
+            'metadata' => $this->metadata,
+            'billing_address' => $this->billingAddress?->toArray(),
+            'shipping_address' => $this->shippingAddress?->toArray()
+        ];
+
+        $filterNulls = fn($v) => $v !== null;
+        return array_filter($payload, $filterNulls);
+    }
+
     public function jsonSerialize(): array
     {
-        $out = [];
-        
-        if ($this->name !== null) $out['name'] = $this->name;
-        if ($this->email !== null) $out['email'] = $this->email;
-        if ($this->description !== null) $out['description'] = $this->description;
-        if ($this->phone !== null) $out['phone'] = $this->phone;
-        if ($this->ssn !== null) $out['ssn'] = $this->ssn;
-        if ($this->dateOfBirth !== null) $out['date_of_birth'] = $this->dateOfBirth;
-        if ($this->metadata !== null) $out['metadata'] = $this->metadata;
-        if ($this->billingAddress !== null) $out['billing_address'] = $this->billingAddress;
-        if ($this->shippingAddress !== null) $out['shipping_address'] = $this->shippingAddress;
-
-        return $out;
+        return $this->toArray();
     }
 }

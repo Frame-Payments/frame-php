@@ -14,12 +14,12 @@ final class Customers {
 
     public function create(CustomerCreateRequest $params): Customer
     {
-        $json = Client::create(self::BASE_PATH, $params);
+        $json = Client::create(self::BASE_PATH, $params->toArray());
         return Customer::fromArray($json);
     }
 
     public function update(string $id, CustomerUpdateRequest $params): Customer {
-        $json = Client::update(self::BASE_PATH . "/{$id}", $params);
+        $json = Client::update(self::BASE_PATH . "/{$id}", $params->toArray());
         return Customer::fromArray($json);
     }
 
@@ -39,7 +39,7 @@ final class Customers {
     }
 
     public function search(CustomerSearchRequest $params): CustomerListResponse {
-        $json  = Client::get(self::BASE_PATH, $params);
+        $json  = Client::get(self::BASE_PATH, $params->toArray());
         return CustomerListResponse::fromArray($json);
     }
 

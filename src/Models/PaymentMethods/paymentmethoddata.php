@@ -41,14 +41,23 @@ final class PaymentMethodData implements \JsonSerializable {
         );
     }
 
-     public function jsonSerialize(): array {
-        return [
+    public function toArray(): array
+    {
+        $payload = [
             'type' => $this->type->value,
             'card_number' => $this->cardNumber,
             'exp_month' => $this->expMonth,
             'exp_year' => $this->expYear,
             'cvc' => $this->cvc,
-            'billing' => $this->billing
+            'billing' => $this->billing?->toArray()
         ];
+
+        $filterNulls = fn($v) => $v !== null;
+        return array_filter($payload, $filterNulls);
+    }
+
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }
