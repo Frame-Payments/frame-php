@@ -9,8 +9,8 @@ final class SubscriptionCreateRequest implements \JsonSerializable
         public readonly string $currency,
         public readonly string $customer,
         public readonly string $defaultPaymentMethod,
-        public readonly ?string $description,
-        public readonly ?array $metadata
+        public readonly ?string $description = null,
+        public readonly ?array $metadata = null
     ){}
 
     public function toArray(): array

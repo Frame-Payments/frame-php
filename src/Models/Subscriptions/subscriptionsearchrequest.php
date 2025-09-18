@@ -5,9 +5,9 @@ namespace Frame\Models\Subscriptions;
 final class SubscriptionSearchRequest implements \JsonSerializable
 {
     public function __construct(
-        public readonly SubscriptionStatus $status,
-        public readonly int $createdAfter,
-        public readonly int $createdBefore
+        public readonly ?SubscriptionStatus $status = null,
+        public readonly ?int $createdAfter = null,
+        public readonly ?int $createdBefore = null
     ){}
 
     public function toArray(): array

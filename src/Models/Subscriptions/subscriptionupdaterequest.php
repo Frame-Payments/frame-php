@@ -5,9 +5,9 @@ namespace Frame\Models\Subscriptions;
 final class SubscriptionUpdateRequest implements \JsonSerializable
 {
     public function __construct(
-        public readonly string $description,
-        public readonly string $defaultPaymentMethod,
-        public readonly array $metadata,
+        public readonly ?string $description = null,
+        public readonly ?string $defaultPaymentMethod = null,
+        public readonly ?array $metadata = null,
     ){}
 
     public function toArray(): array
