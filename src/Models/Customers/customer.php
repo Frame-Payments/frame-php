@@ -11,7 +11,7 @@ final class Customer implements \JsonSerializable {
         public readonly ?Address $billingAddress,
         public readonly ?Address $shippingAddress,
         public readonly string $name,
-        public readonly CustomerStatus $status,
+        public readonly ?CustomerStatus $status,
         public readonly array $paymentMethods,
         public readonly ?string $description,
         public readonly string $email,
@@ -25,12 +25,20 @@ final class Customer implements \JsonSerializable {
     ) {}
 
     public static function fromArray(array $p): self {
+        $status = null;
+        if (isset($p['status'])) {
+            $status = CustomerStatus::tryFrom($p['status']);
+            if ($status === null) {
+                error_log("Unexpected 'CustomerStatus': " . $p['status']);
+            }
+        }
+
         return new self(
             id: $p['id'],
             billingAddress: isset($p['billing_address']) && is_array($p['billing_address']) ? Address::fromArray($p['billing_address']) : null,
             shippingAddress: isset($p['shipping_address']) && is_array($p['shipping_address']) ? Address::fromArray($p['shipping_address']) : null,
             name: $p['name'],
-            status: CustomerStatus::from($p['status']),
+            status: $status,
             paymentMethods: isset($p['payment_methods']) && is_array($p['payment_methods']) ? array_map(fn($pm) => PaymentMethod::fromArray($pm), $p['payment_methods']) : [],
             description: $p['description'] ?? null,
             email: $p['email'],
