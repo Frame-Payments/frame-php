@@ -9,6 +9,7 @@ final class Subscription implements \JsonSerializable {
         public readonly int $currentPeriodStart,
         public readonly int $currentPeriodEnd,
         public readonly bool $livemode,
+        public readonly ?SubscriptionPlan $plan,
         public readonly string $currency,
         public readonly ?SubscriptionStatus $status,
         public readonly string $customer,
@@ -34,6 +35,7 @@ final class Subscription implements \JsonSerializable {
             currentPeriodStart: (int)$p['current_period_start'],
             currentPeriodEnd: (int)$p['current_period_end'],
             livemode: (bool)$p['livemode'],
+            plan: isset($p['plan']) && is_array($p['plan']) ? SubscriptionPlan::fromArray($p['plan']) : null,
             currency: $p['currency'],
             status: $status,
             customer: $p['customer'],
@@ -60,6 +62,7 @@ final class Subscription implements \JsonSerializable {
             'start_date' => $this->startDate,
             'created' => $this->created,
             'object' => $this->object,
+            'plan' => $this->plan
         ];
     }
 }
