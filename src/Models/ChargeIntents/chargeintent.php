@@ -13,7 +13,7 @@ final class ChargeIntent implements \JsonSerializable {
         public readonly ?Customer $customer,
         public readonly ?PaymentMethod $paymentMethod,
         public readonly ?Address $shipping,
-        public readonly ChargeIntentStatus $status,
+        public readonly ?ChargeIntentStatus $status,
         public readonly ?string $clientSecret,
         public readonly ?string $description,
         public readonly int $amount,
@@ -24,6 +24,14 @@ final class ChargeIntent implements \JsonSerializable {
     ) {}
 
     public static function fromArray(array $p): self {
+        $status = null;
+        if (isset($p['status'])) {
+            $status = ChargeIntentStatus::tryFrom($p['status']);
+            if ($status === null) {
+                error_log("Unexpected ChargeIntentStatus: " . $p['status']);
+            }
+        }
+
         return new self(
             id: $p['id'],
             currency: $p['currency'],
@@ -31,7 +39,7 @@ final class ChargeIntent implements \JsonSerializable {
             paymentMethod: isset($p['payment_method']) && is_array($p['payment_method']) ? PaymentMethod::fromArray($p['payment_method']) : null,
             shipping: isset($p['shipping']) && is_array($p['shipping']) ? Address::fromArray($p['shipping']) : null,
             clientSecret: $p['client_secret'] ?? null,
-            status: ChargeIntentStatus::from($p['status']),
+            status: $status,
             description: $p['description'] ?? null,
             amount: (int)$p['amount'],
             created: (int)$p['created'],

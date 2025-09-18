@@ -30,17 +30,6 @@ final class PaymentMethodData implements \JsonSerializable {
         }
     }
 
-    public static function fromArray(array $p): self {
-        return new self(
-            type: $p['type'],
-            cardNumber: $p['card_number'],
-            expMonth: $p['exp_month'],
-            expYear: $p['exp_year'],
-            cvc: $p['cvc'],
-            billing: isset($p['billing']) && is_array($p['billing']) ? Address::fromArray($p['billing']) : null
-        );
-    }
-
     public function toArray(): array
     {
         $payload = [

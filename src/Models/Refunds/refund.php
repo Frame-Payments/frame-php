@@ -20,12 +20,28 @@ final class Refund implements \JsonSerializable {
     ) {}
 
     public static function fromArray(array $p): self {
+        $status = null;
+        if (isset($p['status'])) {
+            $status = RefundStatus::tryFrom($p['status']);
+            if ($status === null) {
+                error_log("Unexpected RefundStatus: " . $p['status']);
+            }
+        }
+
+        $reason = null;
+        if (isset($p['reason'])) {
+            $reason = RefundReason::tryFrom($p['reason']);
+            if ($reason === null) {
+                error_log("Unexpected RefundReason: " . $p['reason']);
+            }
+        }
+
         return new self(
             id: $p['id'],
             currency: $p['currency'],
-            status: isset($p['status']) ? RefundStatus::from($p['status']) : null,
+            status: $status,
             amount: (int)$p['amount'],
-            reason: isset($p['reason']) ? RefundReason::from($p['reason']) : null,
+            reason: $reason,
             chargeIntent: isset($p['charge_intent']) ? $p['charge_intent'] : null,
             livemode: (bool)$p['livemode'],
             created: (int)$p['created'],
