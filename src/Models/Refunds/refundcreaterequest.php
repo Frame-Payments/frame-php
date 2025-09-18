@@ -7,7 +7,7 @@ final class RefundCreateRequest implements \JsonSerializable
     public function __construct(
         public readonly int $amount,
         public readonly string $chargeIntent,
-        public readonly string $reason,
+        public readonly RefundReason $reason,
     ){}
 
     public function toArray(): array
@@ -15,7 +15,7 @@ final class RefundCreateRequest implements \JsonSerializable
         $payload = [
             'amount' => $this->amount,
             'charge_intent' => $this->chargeIntent,
-            'reason' => $this->reason
+            'reason' => $this->reason->value
         ];
 
         $filterNulls = fn($v) => $v !== null;
