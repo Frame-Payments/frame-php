@@ -13,7 +13,7 @@ final class SubscriptionSearchRequest implements \JsonSerializable
     public function toArray(): array
     {
         $payload = [
-            'status' => $this->status->value,
+            'status' => $this->status?->value,
             'created_after' => $this->createdAfter,
             'created_before' => $this->createdBefore
         ];

@@ -55,7 +55,7 @@ final class Subscription implements \JsonSerializable {
             'current_period_end' => $this->currentPeriodEnd,
             'livemode' => $this->livemode,
             'currency' => $this->currency,
-            'status' => $this->status->value,
+            'status' => $this->status?->value,
             'customer' => $this->customer,
             'default_payment_method' => $this->defaultPaymentMethod,
             'metadata' => $this->metadata,
