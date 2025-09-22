@@ -24,7 +24,7 @@ final class SubscriptionPhases {
     }
 
     public function create(string $subscriptionId, PhaseCreateRequest $params): SubscriptionPhase {
-        $json = Client::create(self::BASE_PATH  . "/{$subscriptionId}/phases/", $params->toArray());
+        $json = Client::post(self::BASE_PATH  . "/{$subscriptionId}/phases/", $params->toArray());
         return SubscriptionPhase::fromArray($json);
     }
 
