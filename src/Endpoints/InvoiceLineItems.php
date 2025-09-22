@@ -7,13 +7,13 @@ use Frame\Models\InvoiceLineItems\InvoiceLineItem;
 use Frame\Models\InvoiceLineItems\LineItemCreateRequest;
 use Frame\Models\InvoiceLineItems\LineItemUpdateRequest;
 use Frame\Models\InvoiceLineItems\LineItemListResponse;
-use Frame\Models\Invoice\InvoiceDeletedResponse;
+use Frame\Models\Invoices\InvoiceDeletedResponse;
 
 final class Invoices {
     private const BASE_PATH = '/v1/invoices/';
 
     public function create(string $invoiceId, LineItemCreateRequest $params): InvoiceLineItem {
-        $json = Client::create(self::BASE_PATH . "{$invoiceId}/line_items", $params->toArray());
+        $json = Client::post(self::BASE_PATH . "{$invoiceId}/line_items", $params->toArray());
         return InvoiceLineItem::fromArray($json);
     }
 
