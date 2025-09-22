@@ -13,7 +13,7 @@ final class InvoiceCreateRequest implements \JsonSerializable
         public readonly ?string $memo = null,
         /** @var array<string,string>|null */
         public readonly ?array $metadata = null,
-        public readonly ?InvoiceLineItems $lineItems = null,
+        public readonly ?InvoiceLineItems $lineItems = null
     ){}
 
     public function toArray(): array

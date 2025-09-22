@@ -14,7 +14,7 @@ final class Invoices {
     private const BASE_PATH = '/v1/invoices';
 
     public function create(InvoiceCreateRequest $params): Invoice {
-        $json = Client::create(self::BASE_PATH, $params->toArray());
+        $json = Client::post(self::BASE_PATH, $params->toArray());
         return Invoice::fromArray($json);
     }
 
@@ -39,7 +39,7 @@ final class Invoices {
     }
 
     public function issue(string $id): Invoice {
-        $json = Client::create(self::BASE_PATH . "/{$id}/issue");
+        $json = Client::post(self::BASE_PATH . "/{$id}/issue");
         return Invoice::fromArray($json);
     }
 }
