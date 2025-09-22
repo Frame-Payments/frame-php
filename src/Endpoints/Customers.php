@@ -14,7 +14,7 @@ final class Customers {
 
     public function create(CustomerCreateRequest $params): Customer
     {
-        $json = Client::create(self::BASE_PATH, $params->toArray());
+        $json = Client::post(self::BASE_PATH, $params->toArray());
         return Customer::fromArray($json);
     }
 
@@ -44,12 +44,12 @@ final class Customers {
     }
 
     public function block(string $id): Customer {
-        $json = Client::create(self::BASE_PATH . "/{$id}/block");
+        $json = Client::post(self::BASE_PATH . "/{$id}/block");
         return Customer::fromArray($json);
     }
 
     public function unblock(string $id): Customer {
-        $json = Client::create(self::BASE_PATH . "/{$id}/unblock");
+        $json = Client::post(self::BASE_PATH . "/{$id}/unblock");
         return Customer::fromArray($json);
     }
 }

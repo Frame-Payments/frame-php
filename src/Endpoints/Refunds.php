@@ -12,7 +12,7 @@ final class Refunds {
 
     public function create(RefundCreateRequest $params): Refund
     {
-        $json = Client::create(self::BASE_PATH, $params->toArray());
+        $json = Client::post(self::BASE_PATH, $params->toArray());
         return Refund::fromArray($json);
     }
 
@@ -27,7 +27,7 @@ final class Refunds {
     }
 
     public function cancel(string $id): Refund {
-        $json = Client::create(self::BASE_PATH . "/{$id}/cancel", []);
+        $json = Client::post(self::BASE_PATH . "/{$id}/cancel", []);
         return Refund::fromArray($json);
     }
 }
