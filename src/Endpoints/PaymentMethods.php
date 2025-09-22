@@ -14,13 +14,13 @@ final class PaymentMethods {
 
     public function createCard(PaymentMethodCreateCardRequest $params): PaymentMethod
     {
-        $json = Client::create(self::BASE_PATH, $params->toArray());
+        $json = Client::post(self::BASE_PATH, $params->toArray());
         return PaymentMethod::fromArray($json);
     }
 
     public function createBank(PaymentMethodCreateACHRequest $params): PaymentMethod
     {
-        $json = Client::create(self::BASE_PATH, $params->toArray());
+        $json = Client::post(self::BASE_PATH, $params->toArray());
         return PaymentMethod::fromArray($json);
     }
 
@@ -45,22 +45,22 @@ final class PaymentMethods {
     }
 
     public function attach(string $id): PaymentMethod {
-        $json = Client::create(self::BASE_PATH . "/{$id}/attach");
+        $json = Client::post(self::BASE_PATH . "/{$id}/attach");
         return PaymentMethod::fromArray($json);
     }
 
     public function detach(string $id): PaymentMethod {
-        $json = Client::create(self::BASE_PATH . "/{$id}/detach");
+        $json = Client::post(self::BASE_PATH . "/{$id}/detach");
         return PaymentMethod::fromArray($json);
     }
 
     public function block(string $id): PaymentMethod {
-        $json = Client::create(self::BASE_PATH . "/{$id}/block");
+        $json = Client::post(self::BASE_PATH . "/{$id}/block");
         return PaymentMethod::fromArray($json);
     }
 
     public function unblock(string $id): PaymentMethod {
-        $json = Client::create(self::BASE_PATH . "/{$id}/unblock");
+        $json = Client::post(self::BASE_PATH . "/{$id}/unblock");
         return PaymentMethod::fromArray($json);
     }
 }

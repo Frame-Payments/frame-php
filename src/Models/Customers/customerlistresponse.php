@@ -4,7 +4,7 @@ namespace Frame\Models\Customers;
 
 final class CustomerListResponse implements \JsonSerializable {
 public function __construct(
-        public readonly ?array $meta,
+        public readonly array $meta,
         public readonly array $customers
     ) {}
 

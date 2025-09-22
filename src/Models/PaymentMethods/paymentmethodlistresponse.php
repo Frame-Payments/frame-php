@@ -4,7 +4,7 @@ namespace Frame\Models\PaymentMethods;
 
 final class PaymentMethodListResponse implements \JsonSerializable {
 public function __construct(
-        public readonly ?array $meta,
+        public readonly array $meta,
         public readonly array $methods
     ) {}
 

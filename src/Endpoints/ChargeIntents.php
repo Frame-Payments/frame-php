@@ -13,7 +13,7 @@ final class ChargeIntents {
 
     public function create(ChargeIntentCreateRequest $params): ChargeIntent
     {
-        $json = Client::create(self::BASE_PATH, $params->toArray());
+        $json = Client::post(self::BASE_PATH, $params->toArray());
         return ChargeIntent::fromArray($json);
     }
 
@@ -33,17 +33,17 @@ final class ChargeIntents {
     }
 
     public function confirm(string $id): ChargeIntent {
-        $json = Client::create(self::BASE_PATH . "/{$id}/confirm", []);
+        $json = Client::post(self::BASE_PATH . "/{$id}/confirm", []);
         return ChargeIntent::fromArray($json);
     }
 
     public function capture(string $id): ChargeIntent {
-        $json = Client::create(self::BASE_PATH . "/{$id}/capture", []);
+        $json = Client::post(self::BASE_PATH . "/{$id}/capture", []);
         return ChargeIntent::fromArray($json);
     }
 
     public function cancel(string $id): ChargeIntent {
-        $json = Client::create(self::BASE_PATH . "/{$id}/cancel", []);
+        $json = Client::post(self::BASE_PATH . "/{$id}/cancel", []);
         return ChargeIntent::fromArray($json);
     }
 }
