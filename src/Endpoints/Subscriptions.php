@@ -14,7 +14,7 @@ final class Subscriptions {
 
     public function create(SubscriptionCreateRequest $params): Subscription
     {
-        $json = Client::create(self::BASE_PATH, $params->toArray());
+        $json = Client::post(self::BASE_PATH, $params->toArray());
         return Subscription::fromArray($json);
     }
 
@@ -39,7 +39,7 @@ final class Subscriptions {
     }
 
     public function cancel(string $id): Subscription {
-        $json = Client::create(self::BASE_PATH . "/{$id}/cancel");
+        $json = Client::post(self::BASE_PATH . "/{$id}/cancel");
         return Subscription::fromArray($json);
     }
 }
