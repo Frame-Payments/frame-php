@@ -4,7 +4,7 @@ namespace Frame\Models\ChargeIntents;
 
 final class ChargeIntentListResponse implements \JsonSerializable {
 public function __construct(
-        public readonly ?array $meta,
+        public readonly array $meta,
         public readonly array $chargeIntents
     ) {}
 

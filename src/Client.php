@@ -49,7 +49,7 @@ final class Client {
         }
     }
 
-    public static function create(string $endpoint, array $body = [])
+    public static function post(string $endpoint, array $body = [])
     {
         return self::request('POST', $endpoint, $body);
     }
