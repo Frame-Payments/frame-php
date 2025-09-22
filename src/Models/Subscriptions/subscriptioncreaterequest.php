@@ -11,7 +11,11 @@ final class SubscriptionCreateRequest implements \JsonSerializable
         public readonly string $defaultPaymentMethod,
         public readonly ?string $description = null,
         public readonly ?array $metadata = null
-    ){}
+    ){
+        if (strtolower($this->currency) !== 'usd') {
+            throw new \InvalidArgumentException('currency must be USD');
+        }
+    }
 
     public function toArray(): array
     {
