@@ -22,8 +22,8 @@ final class ProductCreateRequest implements \JsonSerializable
             'name' => $this->name,
             'description' => $this->description,
             'default_price' => $this->defaultPrice,
-            'purchase_type' => $this->purchaseType,
-            'recurring_interval' => $this->recurringInterval,
+            'purchase_type' => $this->purchaseType->value,
+            'recurring_interval' => $this->recurringInterval?->value,
             'shippable' => $this->shippable,
             'url' => $this->url,
             'metadata' => $this->metadata
