@@ -28,9 +28,9 @@ final class Invoices {
         return Invoice::fromArray($json);
     }
 
-    public function delete(string $id): InvoiceDeletedResponse {
+    public function delete(string $id): DeletedResponse {
         $json = Client::delete(self::BASE_PATH . "/{$id}");
-        return InvoiceDeletedResponse::fromArray($json);
+        return DeletedResponse::fromArray($json);
     }
 
     public function list(int $perPage = 10, int $page = 1, ?string $customer = null, ?InvoiceStatus $status = null): InvoiceListResponse {
