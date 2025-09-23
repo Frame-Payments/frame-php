@@ -43,7 +43,7 @@ final class ChargeIntent implements \JsonSerializable {
             description: $p['description'] ?? null,
             amount: (int)$p['amount'],
             created: (int)$p['created'],
-            updated: isset($p['updated']) ? (int)$p['updated'] : null,
+            updated: (int)$p['updated'] ?? null,
             livemode: (bool)$p['livemode'],
             object: $p['object']
         );

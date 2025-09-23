@@ -42,12 +42,12 @@ final class Customer implements \JsonSerializable {
             paymentMethods: isset($p['payment_methods']) && is_array($p['payment_methods']) ? array_map(fn($pm) => PaymentMethod::fromArray($pm), $p['payment_methods']) : [],
             description: $p['description'] ?? null,
             email: $p['email'],
-            phone: $p['phone'],
-            dateOfBirth: $p['date_of_birth'],
+            phone: $p['phone'] ?? null,
+            dateOfBirth: $p['date_of_birth'] ?? null,
             metadata: isset($p['metadata']) && is_array($p['metadata']) ? $p['metadata'] : [],
             livemode: (bool)$p['livemode'],
             created: (int)$p['created'],
-            updated: isset($p['updated']) ? (int)$p['updated'] : null,
+            updated: (int)$p['updated'] ?? null,
             object: $p['object']
         );
     }

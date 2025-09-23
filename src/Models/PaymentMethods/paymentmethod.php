@@ -42,7 +42,7 @@ final class PaymentMethod implements \JsonSerializable {
             billing: Address::fromArray($p['billing']),
             type: $type,
             created: (int)$p['created'],
-            updated: isset($p['updated']) ? (int)$p['updated'] : null,
+            updated: (int)$p['updated'] ?? null,
             livemode: (bool)$p['livemode'],
             object: $p['object'],
             status: $status,
