@@ -27,13 +27,13 @@ final class CustomerIdentity implements \JsonSerializable {
         return new self(
             id: $p['id'],
             status: $status,
-            verificationURL: $p['verification_url'],
+            verificationURL: $p['verification_url'] ?? null,
             created: (int)$p['created'],
-            updated: isset($p['updated']) ? (int)$p['updated'] : null,
+            updated: (int)$p['updated'],
             object: $p['object'],
-            pending: (int)$p['pending'],
-            verified: (int)$p['verified'],
-            failed: (int)$p['failed']
+            pending: (int)$p['pending'] ?? null,
+            verified: (int)$p['verified'] ?? null,
+            failed: (int)$p['failed'] ?? null
         );
     }
 
