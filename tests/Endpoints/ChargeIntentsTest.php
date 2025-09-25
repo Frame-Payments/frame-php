@@ -109,7 +109,7 @@ class ChargeIntentsTest extends TestCase
         $this->mockClient
             ->shouldReceive('post')
             ->once()
-            ->with("/v1/charge_intents/{$intentId}/confirm")
+            ->with("/v1/charge_intents/{$intentId}/confirm", [])
             ->andReturn($sampleChargeIntentData);
 
         $chargeIntent = $this->chargeIntentsEndpoint->confirm($intentId);
@@ -124,7 +124,7 @@ class ChargeIntentsTest extends TestCase
         $this->mockClient
             ->shouldReceive('post')
             ->once()
-            ->with("/v1/charge_intents/{$intentId}/capture")
+            ->with("/v1/charge_intents/{$intentId}/capture", [])
             ->andReturn($sampleChargeIntentData);
 
         $chargeIntent = $this->chargeIntentsEndpoint->capture($intentId);
@@ -134,13 +134,12 @@ class ChargeIntentsTest extends TestCase
     public function testCancel()
     {
         $intentId = 'ci_123';
-        $params = ['cancellation_reason' => 'requested_by_customer'];
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
             ->shouldReceive('post')
             ->once()
-            ->with("/v1/charge_intents/{$intentId}/cancel")
+            ->with("/v1/charge_intents/{$intentId}/cancel", [])
             ->andReturn($sampleChargeIntentData);
 
         $chargeIntent = $this->chargeIntentsEndpoint->cancel($intentId);
