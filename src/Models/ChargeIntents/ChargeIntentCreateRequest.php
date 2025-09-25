@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\ChargeIntents;
 
 use Frame\Models\PaymentMethods\PaymentMethodData;
-use Frame\Models\ChargeIntents\AuthorizationMode;
 
 final class ChargeIntentCreateRequest implements \JsonSerializable
 {
@@ -26,7 +27,7 @@ final class ChargeIntentCreateRequest implements \JsonSerializable
     public function toArray(): array
     {
         $payload = [
-            'amount'   => $this->amount,
+            'amount' => $this->amount,
             'currency' => $this->currency,
             'description' => $this->description,
             'customer' => $this->customer,
@@ -36,7 +37,8 @@ final class ChargeIntentCreateRequest implements \JsonSerializable
             'authorization_mode' => $this->authorizationMode?->value,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

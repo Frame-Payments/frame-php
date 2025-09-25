@@ -1,10 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Invoices;
 
 use Frame\Models\Customers\Customer;
 
-final class Invoice implements \JsonSerializable {
+final class Invoice implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly ?Customer $customer,
@@ -22,9 +25,11 @@ final class Invoice implements \JsonSerializable {
         public readonly int $updated,
         public readonly string $object,
         public readonly array $lineItems
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         $status = null;
         if (isset($p['status'])) {
             $status = InvoiceStatus::tryFrom($p['status']);
@@ -57,11 +62,12 @@ final class Invoice implements \JsonSerializable {
             created: (int)$p['created'],
             updated: (int)$p['updated'],
             object: $p['object'],
-            lineItems: isset($p['line_items']) && is_array($p['line_items']) ? array_map(fn($pm) => InvoiceLineItems::fromArray($pm), $p['line_items']) : []
+            lineItems: isset($p['line_items']) && is_array($p['line_items']) ? array_map(fn ($pm) => InvoiceLineItems::fromArray($pm), $p['line_items']) : []
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'customer' => $this->customer,
@@ -78,7 +84,7 @@ final class Invoice implements \JsonSerializable {
             'created' => $this->created,
             'updated' => $this->updated,
             'object' => $this->object,
-            'line_items' => $this->lineItems
+            'line_items' => $this->lineItems,
         ];
     }
 }

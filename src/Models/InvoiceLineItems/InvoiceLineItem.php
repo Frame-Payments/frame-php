@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\InvoiceLineItems;
 
-final class InvoiceLineItem implements \JsonSerializable {
+final class InvoiceLineItem implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly string $object,
@@ -12,10 +15,12 @@ final class InvoiceLineItem implements \JsonSerializable {
         public readonly string $unitAmountCurrency,
         public readonly int $created,
         public readonly int $updated
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
-       return new self(
+    public static function fromArray(array $p): self
+    {
+        return new self(
             id: $p['id'],
             object: $p['object'],
             description: $p['description'],
@@ -27,7 +32,8 @@ final class InvoiceLineItem implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'object' => $this->object,
@@ -36,7 +42,7 @@ final class InvoiceLineItem implements \JsonSerializable {
             'unit_amount_cents' => $this->unitAmountCents,
             'unit_amount_currency' => $this->unitAmountCurrency,
             'created' => $this->created,
-            'updated' => $this->updated
+            'updated' => $this->updated,
         ];
     }
 }

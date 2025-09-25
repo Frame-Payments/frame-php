@@ -1,12 +1,15 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\ChargeIntents;
 
-use Frame\Models\Customers\Customer;
 use Frame\Models\Customers\Address;
+use Frame\Models\Customers\Customer;
 use Frame\Models\PaymentMethods\PaymentMethod;
 
-final class ChargeIntent implements \JsonSerializable {
+final class ChargeIntent implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly string $currency,
@@ -21,9 +24,11 @@ final class ChargeIntent implements \JsonSerializable {
         public readonly ?int $updated,
         public readonly bool $livemode,
         public readonly string $object,
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         $status = null;
         if (isset($p['status'])) {
             $status = ChargeIntentStatus::tryFrom($p['status']);
@@ -49,7 +54,8 @@ final class ChargeIntent implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'currency' => $this->currency,
@@ -63,7 +69,7 @@ final class ChargeIntent implements \JsonSerializable {
             'created' => $this->created,
             'updated' => $this->updated,
             'livemode' => $this->livemode,
-            'object' => $this->object
+            'object' => $this->object,
         ];
     }
 }

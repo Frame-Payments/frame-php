@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Invoices;
 
-enum InvoiceStatus: string {
+enum InvoiceStatus: string
+{
     case DRAFT = 'draft';
     case OUTSTANDING = 'outstanding';
     case DUE = 'due';

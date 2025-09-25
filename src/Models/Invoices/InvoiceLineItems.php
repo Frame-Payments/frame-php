@@ -1,14 +1,18 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Invoices;
 
-final class InvoiceLineItems implements \JsonSerializable {
-     public function __construct(
-         public readonly string $product,
-         public readonly int $quantity
-     ){}
+final class InvoiceLineItems implements \JsonSerializable
+{
+    public function __construct(
+        public readonly string $product,
+        public readonly int $quantity
+    ) {
+    }
 
-    public static function fromArray(array $p): self 
+    public static function fromArray(array $p): self
     {
         return new self(
             product: $p['product'],
@@ -20,10 +24,11 @@ final class InvoiceLineItems implements \JsonSerializable {
     {
         $payload = [
             'product' => $this->product,
-            'quantity' => $this->quantity
+            'quantity' => $this->quantity,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

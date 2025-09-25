@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Subscriptions;
 
 final class SubscriptionCreateRequest implements \JsonSerializable
@@ -11,7 +13,7 @@ final class SubscriptionCreateRequest implements \JsonSerializable
         public readonly string $defaultPaymentMethod,
         public readonly ?string $description = null,
         public readonly ?array $metadata = null
-    ){
+    ) {
         if (strtolower($this->currency) !== 'usd') {
             throw new \InvalidArgumentException('currency must be USD');
         }
@@ -28,7 +30,8 @@ final class SubscriptionCreateRequest implements \JsonSerializable
             'metadata' => $this->metadata,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

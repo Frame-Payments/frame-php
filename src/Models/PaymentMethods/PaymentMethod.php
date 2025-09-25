@@ -1,10 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\PaymentMethods;
 
 use Frame\Models\Customers\Address;
 
-final class PaymentMethod implements \JsonSerializable {
+final class PaymentMethod implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly ?string $customer,
@@ -17,9 +20,11 @@ final class PaymentMethod implements \JsonSerializable {
         public readonly ?PaymentMethodStatus $status,
         public readonly ?PaymentCard $card,
         // public readonly ?string $ach
-    ){}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         $status = null;
         if (isset($p['status'])) {
             $status = PaymentMethodStatus::tryFrom($p['status']);
@@ -51,7 +56,8 @@ final class PaymentMethod implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'customer' => $this->customer,
@@ -62,7 +68,7 @@ final class PaymentMethod implements \JsonSerializable {
             'updated' => $this->updated,
             'object' => $this->object,
             'status' => $this->status->value,
-            'card' => $this->card
+            'card' => $this->card,
             // 'ach' => $this->ach,
         ];
     }

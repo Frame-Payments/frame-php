@@ -1,11 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Customers;
 
 use Frame\Models\PaymentMethods\PaymentMethod;
-use Frame\Models\Customers\Address;
 
-final class Customer implements \JsonSerializable {
+final class Customer implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly ?Address $billingAddress,
@@ -22,9 +24,11 @@ final class Customer implements \JsonSerializable {
         public readonly int $created,
         public readonly ?int $updated,
         public readonly string $object
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         $status = null;
         if (isset($p['status'])) {
             $status = CustomerStatus::tryFrom($p['status']);
@@ -39,7 +43,7 @@ final class Customer implements \JsonSerializable {
             shippingAddress: isset($p['shipping_address']) && is_array($p['shipping_address']) ? Address::fromArray($p['shipping_address']) : null,
             name: $p['name'],
             status: $status,
-            paymentMethods: isset($p['payment_methods']) && is_array($p['payment_methods']) ? array_map(fn($pm) => PaymentMethod::fromArray($pm), $p['payment_methods']) : [],
+            paymentMethods: isset($p['payment_methods']) && is_array($p['payment_methods']) ? array_map(fn ($pm) => PaymentMethod::fromArray($pm), $p['payment_methods']) : [],
             description: $p['description'] ?? null,
             email: $p['email'],
             phone: $p['phone'],
@@ -52,7 +56,8 @@ final class Customer implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'billing_address' => $this->billingAddress,

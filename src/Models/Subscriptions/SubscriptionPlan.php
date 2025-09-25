@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Subscriptions;
 
-final class SubscriptionPlan implements \JsonSerializable {
+final class SubscriptionPlan implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly string $interval,
@@ -14,9 +17,11 @@ final class SubscriptionPlan implements \JsonSerializable {
         public readonly bool $active,
         public readonly int $created,
         public readonly bool $livemode
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         return new self(
             id: $p['id'],
             interval: $p['interval'],
@@ -31,7 +36,8 @@ final class SubscriptionPlan implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'interval' => $this->interval,
@@ -42,7 +48,7 @@ final class SubscriptionPlan implements \JsonSerializable {
             'livemode' => $this->livemode,
             'currency' => $this->currency,
             'created' => $this->created,
-            'object' => $this->object
+            'object' => $this->object,
         ];
     }
 }

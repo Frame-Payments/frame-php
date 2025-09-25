@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Customers;
 
 final class CustomerCreateRequest implements \JsonSerializable
@@ -15,7 +17,8 @@ final class CustomerCreateRequest implements \JsonSerializable
         public readonly ?array $metadata = null,
         public readonly ?Address $billingAddress = null,
         public readonly ?Address $shippingAddress = null,
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -28,10 +31,11 @@ final class CustomerCreateRequest implements \JsonSerializable
             'date_of_birth' => $this->dateOfBirth,
             'metadata' => $this->metadata,
             'billing_address' => $this->billingAddress?->toArray(),
-            'shipping_address' => $this->shippingAddress?->toArray()
+            'shipping_address' => $this->shippingAddress?->toArray(),
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

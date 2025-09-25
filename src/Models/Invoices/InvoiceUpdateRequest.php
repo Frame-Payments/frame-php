@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Invoices;
 
 final class InvoiceUpdateRequest implements \JsonSerializable
@@ -13,7 +15,8 @@ final class InvoiceUpdateRequest implements \JsonSerializable
         /** @var array<string,string>|null */
         public readonly ?array $metadata = null,
         public readonly ?InvoiceLineItems $lineItems = null,
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -24,10 +27,11 @@ final class InvoiceUpdateRequest implements \JsonSerializable
             'description' => $this->description,
             'memo' => $this->memo,
             'metadata' => $this->metadata,
-            'line_items' => $this->lineItems
+            'line_items' => $this->lineItems,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

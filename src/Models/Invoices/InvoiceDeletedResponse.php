@@ -1,14 +1,18 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Invoices;
 
-final class InvoiceDeletedResponse implements \JsonSerializable {
-     public function __construct(
-         public readonly string $object,
-         public readonly bool $deleted
-     ){}
+final class InvoiceDeletedResponse implements \JsonSerializable
+{
+    public function __construct(
+        public readonly string $object,
+        public readonly bool $deleted
+    ) {
+    }
 
-    public static function fromArray(array $p): self 
+    public static function fromArray(array $p): self
     {
         return new self(
             object: $p['object'],
@@ -16,10 +20,11 @@ final class InvoiceDeletedResponse implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'object' => $this->object,
-            'deleted' => $this->deleted
+            'deleted' => $this->deleted,
         ];
     }
 }

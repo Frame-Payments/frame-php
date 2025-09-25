@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\ChargeIntents;
 
-enum ChargeIntentStatus: string {
+enum ChargeIntentStatus: string
+{
     case INCOMPLETE = 'incomplete';
     case PENDING = 'pending';
     case CANCELED = 'canceled';

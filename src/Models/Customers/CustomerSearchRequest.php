@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Customers;
 
 final class CustomerSearchRequest implements \JsonSerializable
@@ -10,7 +12,8 @@ final class CustomerSearchRequest implements \JsonSerializable
         public readonly ?string $phone = null,
         public readonly ?int $createdBefore = null,
         public readonly ?int $createdAfter = null
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -19,10 +22,11 @@ final class CustomerSearchRequest implements \JsonSerializable
             'email' => $this->email,
             'phone' => $this->phone,
             'created_before' => $this->createdBefore,
-            'created_after' => $this->createdAfter
+            'created_after' => $this->createdAfter,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

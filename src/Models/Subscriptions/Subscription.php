@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Subscriptions;
 
-final class Subscription implements \JsonSerializable {
+final class Subscription implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly string $description,
@@ -18,9 +21,11 @@ final class Subscription implements \JsonSerializable {
         public readonly int $startDate,
         public readonly int $created,
         public readonly string $object
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         $status = null;
         if (isset($p['status'])) {
             $status = SubscriptionStatus::tryFrom($p['status']);
@@ -47,7 +52,8 @@ final class Subscription implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'description' => $this->description,
@@ -62,7 +68,7 @@ final class Subscription implements \JsonSerializable {
             'start_date' => $this->startDate,
             'created' => $this->created,
             'object' => $this->object,
-            'plan' => $this->plan
+            'plan' => $this->plan,
         ];
     }
 }

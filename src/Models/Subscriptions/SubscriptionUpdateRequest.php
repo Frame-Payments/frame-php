@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Subscriptions;
 
 final class SubscriptionUpdateRequest implements \JsonSerializable
@@ -8,7 +10,8 @@ final class SubscriptionUpdateRequest implements \JsonSerializable
         public readonly ?string $description = null,
         public readonly ?string $defaultPaymentMethod = null,
         public readonly ?array $metadata = null,
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -18,7 +21,8 @@ final class SubscriptionUpdateRequest implements \JsonSerializable
             'metadata' => $this->metadata,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

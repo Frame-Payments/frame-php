@@ -1,11 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Refunds;
 
-use Frame\Models\Refunds\RefundReason;
-use Frame\Models\Refunds\RefundStatus;
-
-final class Refund implements \JsonSerializable {
+final class Refund implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly string $currency,
@@ -17,9 +17,11 @@ final class Refund implements \JsonSerializable {
         public readonly int $created,
         public readonly ?int $updated,
         public readonly string $object
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         $status = null;
         if (isset($p['status'])) {
             $status = RefundStatus::tryFrom($p['status']);
@@ -50,7 +52,8 @@ final class Refund implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'currency' => $this->currency,

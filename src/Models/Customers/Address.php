@@ -1,18 +1,22 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Customers;
 
-final class Address implements \JsonSerializable {
-     public function __construct(
-         public readonly ?string $city,
-         public readonly ?string $country,
-         public readonly ?string $state, 
-         public readonly ?string $postalCode,
-         public readonly ?string $line1,
-         public readonly ?string $line2
-     ){}
+final class Address implements \JsonSerializable
+{
+    public function __construct(
+        public readonly ?string $city,
+        public readonly ?string $country,
+        public readonly ?string $state,
+        public readonly ?string $postalCode,
+        public readonly ?string $line1,
+        public readonly ?string $line2
+    ) {
+    }
 
-    public static function fromArray(array $p): self 
+    public static function fromArray(array $p): self
     {
         return new self(
             city: $p['city'] ?? null,
@@ -32,10 +36,11 @@ final class Address implements \JsonSerializable {
             'state' => $this->state,
             'postal_code' => $this->postalCode,
             'line_1' => $this->line1,
-            'line_2' => $this->line2
+            'line_2' => $this->line2,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

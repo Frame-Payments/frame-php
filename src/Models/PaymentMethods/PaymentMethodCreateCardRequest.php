@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\PaymentMethods;
 
 use Frame\Models\Customers\Address;
@@ -14,7 +16,8 @@ final class PaymentMethodCreateCardRequest implements \JsonSerializable
         public readonly string $expYear,
         public readonly string $cvc,
         public readonly ?Address $billing = null
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -25,10 +28,11 @@ final class PaymentMethodCreateCardRequest implements \JsonSerializable
             'exp_year' => $this->expYear,
             'cvc' => $this->cvc,
             'customer' => $this->customer,
-            'billing' => $this->billing?->toArray()
+            'billing' => $this->billing?->toArray(),
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 
