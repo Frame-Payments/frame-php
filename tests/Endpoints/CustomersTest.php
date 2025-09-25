@@ -33,13 +33,15 @@ class CustomersTest extends TestCase
 
     public function testCreate()
     {
-        $createRequest = new CustomerCreateRequest(name: 'John Doe', email: 'john@example.com');
+        $createRequest = Mockery::mock(CustomerCreateRequest::class);
+        $createRequest->shouldReceive('toArray')->once()->andReturn(['name' => 'John Doe', 'email' => 'john@example.com']);
+        
         $sampleCustomerData = $this->getSampleCustomerData();
 
         $this->mockClient
             ->shouldReceive('post')
             ->once()
-            ->with('/v1/customers', $createRequest)
+            ->with('/v1/customers', ['name' => 'John Doe', 'email' => 'john@example.com'])
             ->andReturn($sampleCustomerData);
 
         $customer = $this->customersEndpoint->create($createRequest);
@@ -51,14 +53,16 @@ class CustomersTest extends TestCase
     public function testUpdate()
     {
         $customerId = 'cus_123';
-        $updateRequest = new CustomerUpdateRequest(name: 'Jane Doe');
+        $updateRequest = Mockery::mock(CustomerCreateRequest::class);
+        $updateRequest->shouldReceive('toArray')->once()->andReturn(['name' => 'Jane Doe']);
+
         $sampleCustomerData = $this->getSampleCustomerData();
         $sampleCustomerData['name'] = 'Jane Doe';
 
         $this->mockClient
             ->shouldReceive('update')
             ->once()
-            ->with("/v1/customers/{$customerId}", $updateRequest)
+            ->with("/v1/customers/{$customerId}", ['name' => 'Jane Doe'])
             ->andReturn($sampleCustomerData);
 
         $customer = $this->customersEndpoint->update($customerId, $updateRequest);
