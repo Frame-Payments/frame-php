@@ -86,7 +86,7 @@ class ChargeIntentsTest extends TestCase
     {
         $sampleListData = [
             'data' => [$this->getSampleChargeIntentData()],
-            'meta' => ['total_count' => 1]
+            'meta' => ['total_count' => 1],
         ];
 
         $this->mockClient

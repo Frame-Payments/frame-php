@@ -104,7 +104,7 @@ class CustomersTest extends TestCase
     {
         $sampleListData = [
             'data' => [$this->getSampleCustomerData()],
-            'meta' => ['total_count' => 1]
+            'meta' => ['total_count' => 1],
         ];
 
         $this->mockClient
@@ -124,7 +124,7 @@ class CustomersTest extends TestCase
         $searchRequest = new CustomerSearchRequest(email: 'john@example.com');
         $sampleListData = [
             'data' => [$this->getSampleCustomerData()],
-            'meta' => ['total_count' => 1]
+            'meta' => ['total_count' => 1],
         ];
 
         $this->mockClient

@@ -6,3 +6,7 @@ composer.phar
 coverage/
 coverage.xml
 .phpunit.cache
+
+# PHP CS Fixer
+.php-cs-fixer.cache
+*.phar
