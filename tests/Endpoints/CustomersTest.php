@@ -37,9 +37,9 @@ class CustomersTest extends TestCase
         $sampleCustomerData = $this->getSampleCustomerData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
-            ->with('/v1/customers', $createRequest)
+            ->with('/v1/customers', $createRequest->toArray())
             ->andReturn($sampleCustomerData);
 
         $customer = $this->customersEndpoint->create($createRequest);
@@ -52,13 +52,14 @@ class CustomersTest extends TestCase
     {
         $customerId = 'cus_123';
         $updateRequest = new CustomerUpdateRequest(name: 'Jane Doe');
+
         $sampleCustomerData = $this->getSampleCustomerData();
         $sampleCustomerData['name'] = 'Jane Doe';
 
         $this->mockClient
             ->shouldReceive('update')
             ->once()
-            ->with("/v1/customers/{$customerId}", $updateRequest)
+            ->with("/v1/customers/{$customerId}", $updateRequest->toArray())
             ->andReturn($sampleCustomerData);
 
         $customer = $this->customersEndpoint->update($customerId, $updateRequest);
@@ -129,7 +130,7 @@ class CustomersTest extends TestCase
         $this->mockClient
             ->shouldReceive('get')
             ->once()
-            ->with('/v1/customers', $searchRequest)
+            ->with('/v1/customers', $searchRequest->toArray())
             ->andReturn($sampleListData);
 
         $response = $this->customersEndpoint->search($searchRequest);
@@ -143,7 +144,7 @@ class CustomersTest extends TestCase
         $sampleCustomerData = $this->getSampleCustomerData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with("/v1/customers/{$customerId}/block")
             ->andReturn($sampleCustomerData);
@@ -158,7 +159,7 @@ class CustomersTest extends TestCase
         $sampleCustomerData = $this->getSampleCustomerData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with("/v1/customers/{$customerId}/unblock")
             ->andReturn($sampleCustomerData);
