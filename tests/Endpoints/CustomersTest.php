@@ -37,7 +37,7 @@ class CustomersTest extends TestCase
         $sampleCustomerData = $this->getSampleCustomerData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with('/v1/customers', $createRequest)
             ->andReturn($sampleCustomerData);
@@ -143,7 +143,7 @@ class CustomersTest extends TestCase
         $sampleCustomerData = $this->getSampleCustomerData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with("/v1/customers/{$customerId}/block")
             ->andReturn($sampleCustomerData);
@@ -158,7 +158,7 @@ class CustomersTest extends TestCase
         $sampleCustomerData = $this->getSampleCustomerData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with("/v1/customers/{$customerId}/unblock")
             ->andReturn($sampleCustomerData);

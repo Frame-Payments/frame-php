@@ -35,7 +35,7 @@ class ChargeIntentsTest extends TestCase
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with('/v1/charge_intents', $createRequest)
             ->andReturn($sampleChargeIntentData);
@@ -108,7 +108,7 @@ class ChargeIntentsTest extends TestCase
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with("/v1/charge_intents/{$intentId}/confirm", $params)
             ->andReturn($sampleChargeIntentData);
@@ -124,7 +124,7 @@ class ChargeIntentsTest extends TestCase
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with("/v1/charge_intents/{$intentId}/capture", $params)
             ->andReturn($sampleChargeIntentData);
@@ -140,7 +140,7 @@ class ChargeIntentsTest extends TestCase
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
             ->with("/v1/charge_intents/{$intentId}/cancel", $params)
             ->andReturn($sampleChargeIntentData);
