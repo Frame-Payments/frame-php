@@ -1,3 +1,8 @@
 /vendor
 composer-setup.php
 composer.phar
+
+# Coverage reports
+coverage/
+coverage.xml
+.phpunit.cache
