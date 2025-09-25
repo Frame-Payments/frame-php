@@ -17,6 +17,15 @@ $config
         ],
         'phpdoc_single_line_var_spacing' => true,
         'phpdoc_var_without_name' => true,
+        'blank_line_after_opening_tag' => true,
+        'blank_lines_before_namespace' => true,
+        'single_blank_line_at_eof' => true,
+        'class_definition' => ['single_line' => false],
+        'function_declaration' => ['closure_function_spacing' => 'one'],
+        'braces_position' => [
+            'classes_opening_brace' => 'next_line_unless_newline_at_signature_end',
+            'functions_opening_brace' => 'next_line_unless_newline_at_signature_end',
+        ],
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
