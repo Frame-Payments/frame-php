@@ -130,7 +130,7 @@ class CustomersTest extends TestCase
         $this->mockClient
             ->shouldReceive('get')
             ->once()
-            ->with('/v1/customers', $searchRequest)
+            ->with('/v1/customers', $searchRequest->toArray())
             ->andReturn($sampleListData);
 
         $response = $this->customersEndpoint->search($searchRequest);
