@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\IdentityVerifications;
 
 use Frame\Models\Customers\Address;
@@ -14,7 +16,8 @@ final class IdentityCreateRequest implements \JsonSerializable
         public readonly string $phoneNumber,
         public readonly string $ssn,
         public readonly Address $address
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -25,7 +28,7 @@ final class IdentityCreateRequest implements \JsonSerializable
             'email' => $this->email,
             'phone_number' => $this->phoneNumber,
             'ssn' => $this->ssn,
-            'address' => $this->address
+            'address' => $this->address,
         ];
     }
 
