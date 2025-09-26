@@ -15,16 +15,16 @@ class AuthTest extends TestCase
         $property = $reflection->getProperty('apiKey');
         $property->setAccessible(true);
         $property->setValue(null, null);
-        
+
         parent::tearDown();
     }
 
     public function testSetAndGetApiKey()
     {
         $apiKey = 'test_api_key_123';
-        
+
         Auth::setApiKey($apiKey);
-        
+
         $this->assertEquals($apiKey, Auth::getApiKey());
     }
 
@@ -32,7 +32,7 @@ class AuthTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('API key not set. Use Frame\Auth::setApiKey() to set it.');
-        
+
         Auth::getApiKey();
     }
 
@@ -40,10 +40,10 @@ class AuthTest extends TestCase
     {
         $firstApiKey = 'first_api_key';
         $secondApiKey = 'second_api_key';
-        
+
         Auth::setApiKey($firstApiKey);
         $this->assertEquals($firstApiKey, Auth::getApiKey());
-        
+
         Auth::setApiKey($secondApiKey);
         $this->assertEquals($secondApiKey, Auth::getApiKey());
     }

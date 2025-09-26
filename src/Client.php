@@ -5,12 +5,13 @@ namespace Frame;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
 
-final class Client {
+final class Client
+{
     private static $client;
 
     private static function getClient()
     {
-        if (!self::$client) {
+        if (! self::$client) {
             self::$client = new GuzzleClient([
                 'base_uri' => 'https://api.framepayments.com',
                 'headers' => [
@@ -27,7 +28,7 @@ final class Client {
     private static function request(string $method, string $endpoint, array $body = [])
     {
         $options = [];
-        if (!empty($body)) {
+        if (! empty($body)) {
             if ($method === 'GET') {
                 $options['query'] = $body;
             } else {
@@ -38,13 +39,16 @@ final class Client {
 
         try {
             $response = self::getClient()->request($method, $endpoint, $options);
+
             return json_decode((string)$response->getBody(), true);
         } catch (RequestException $e) {
             $response = $e->getResponse();
             if ($response) {
                 $errorBody = json_decode((string)$response->getBody(), true);
+
                 throw Exception::fromResponse($errorBody);
             }
+
             throw new Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
