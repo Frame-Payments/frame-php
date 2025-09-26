@@ -3,8 +3,8 @@
 namespace Frame\Tests\Unit;
 
 use Frame\Request;
-use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Frame\Tests\TestCase;
+use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class RequestTest extends TestCase
 {
@@ -14,9 +14,9 @@ class RequestTest extends TestCase
         $uri = '/v1/customers';
         $body = ['name' => 'John Doe'];
         $headers = ['Content-Type' => 'application/json'];
-        
+
         $request = new Request($method, $uri, $body, $headers);
-        
+
         $this->assertEquals($method, $request->getMethod());
         $this->assertEquals($uri, $request->getUri());
         $this->assertEquals($body, $request->getBody());
@@ -27,9 +27,9 @@ class RequestTest extends TestCase
     {
         $method = 'GET';
         $uri = '/v1/customers';
-        
+
         $request = new Request($method, $uri);
-        
+
         $this->assertEquals($method, $request->getMethod());
         $this->assertEquals($uri, $request->getUri());
         $this->assertEquals([], $request->getBody());
@@ -42,10 +42,10 @@ class RequestTest extends TestCase
         $uri = '/v1/customers';
         $body = ['name' => 'John Doe', 'email' => 'john@example.com'];
         $headers = ['Content-Type' => 'application/json'];
-        
+
         $request = new Request($method, $uri, $body, $headers);
         $guzzleRequest = $request->toGuzzleRequest();
-        
+
         $this->assertInstanceOf(GuzzleRequest::class, $guzzleRequest);
         $this->assertEquals($method, $guzzleRequest->getMethod());
         $this->assertEquals($uri, $guzzleRequest->getUri());
@@ -57,10 +57,10 @@ class RequestTest extends TestCase
     {
         $method = 'GET';
         $uri = '/v1/customers';
-        
+
         $request = new Request($method, $uri);
         $guzzleRequest = $request->toGuzzleRequest();
-        
+
         $this->assertEquals('[]', $guzzleRequest->getBody()->getContents());
     }
 }
