@@ -2,8 +2,8 @@
 
 namespace Frame\Tests;
 
-use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Mockery;
+use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
 abstract class TestCase extends PHPUnitTestCase
 {
@@ -40,17 +40,17 @@ abstract class TestCase extends PHPUnitTestCase
                 'city' => 'New York',
                 'state' => 'NY',
                 'postal_code' => '10001',
-                'country' => 'US'
+                'country' => 'US',
             ],
             'shipping_address' => [
                 'line1' => '123 Main St',
                 'city' => 'New York',
                 'state' => 'NY',
                 'postal_code' => '10001',
-                'country' => 'US'
+                'country' => 'US',
             ],
             'payment_methods' => [],
-            'metadata' => []
+            'metadata' => [],
         ];
     }
 
@@ -72,7 +72,7 @@ abstract class TestCase extends PHPUnitTestCase
             'object' => 'charge_intent',
             'customer' => null,
             'payment_method' => null,
-            'shipping' => null
+            'shipping' => null,
         ];
     }
 }

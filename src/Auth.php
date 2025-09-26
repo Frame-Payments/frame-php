@@ -13,7 +13,7 @@ class Auth
 
     public static function getApiKey()
     {
-        if (!self::$apiKey) {
+        if (! self::$apiKey) {
             throw new Exception('API key not set. Use Frame\Auth::setApiKey() to set it.'); // Updated class name if necessary
         }
 

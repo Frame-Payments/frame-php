@@ -35,9 +35,9 @@ class ChargeIntentsTest extends TestCase
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
-            ->with('/v1/charge_intents', $createRequest)
+            ->with('/v1/charge_intents', $createRequest->toArray())
             ->andReturn($sampleChargeIntentData);
 
         $chargeIntent = $this->chargeIntentsEndpoint->create($createRequest);
@@ -56,7 +56,7 @@ class ChargeIntentsTest extends TestCase
         $this->mockClient
             ->shouldReceive('update')
             ->once()
-            ->with("/v1/charge_intents/{$intentId}", $updateRequest)
+            ->with("/v1/charge_intents/{$intentId}", $updateRequest->toArray())
             ->andReturn($sampleChargeIntentData);
 
         $chargeIntent = $this->chargeIntentsEndpoint->update($intentId, $updateRequest);
@@ -86,7 +86,7 @@ class ChargeIntentsTest extends TestCase
     {
         $sampleListData = [
             'data' => [$this->getSampleChargeIntentData()],
-            'meta' => ['total_count' => 1]
+            'meta' => ['total_count' => 1],
         ];
 
         $this->mockClient
@@ -104,48 +104,45 @@ class ChargeIntentsTest extends TestCase
     public function testConfirm()
     {
         $intentId = 'ci_123';
-        $params = ['payment_method' => 'pm_abc'];
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
-            ->with("/v1/charge_intents/{$intentId}/confirm", $params)
+            ->with("/v1/charge_intents/{$intentId}/confirm", [])
             ->andReturn($sampleChargeIntentData);
 
-        $chargeIntent = $this->chargeIntentsEndpoint->confirm($intentId, $params);
+        $chargeIntent = $this->chargeIntentsEndpoint->confirm($intentId);
         $this->assertInstanceOf(ChargeIntent::class, $chargeIntent);
     }
 
     public function testCapture()
     {
         $intentId = 'ci_123';
-        $params = ['amount' => 1500];
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
-            ->with("/v1/charge_intents/{$intentId}/capture", $params)
+            ->with("/v1/charge_intents/{$intentId}/capture", [])
             ->andReturn($sampleChargeIntentData);
 
-        $chargeIntent = $this->chargeIntentsEndpoint->capture($intentId, $params);
+        $chargeIntent = $this->chargeIntentsEndpoint->capture($intentId);
         $this->assertInstanceOf(ChargeIntent::class, $chargeIntent);
     }
 
     public function testCancel()
     {
         $intentId = 'ci_123';
-        $params = ['cancellation_reason' => 'requested_by_customer'];
         $sampleChargeIntentData = $this->getSampleChargeIntentData();
 
         $this->mockClient
-            ->shouldReceive('create')
+            ->shouldReceive('post')
             ->once()
-            ->with("/v1/charge_intents/{$intentId}/cancel", $params)
+            ->with("/v1/charge_intents/{$intentId}/cancel", [])
             ->andReturn($sampleChargeIntentData);
 
-        $chargeIntent = $this->chargeIntentsEndpoint->cancel($intentId, $params);
+        $chargeIntent = $this->chargeIntentsEndpoint->cancel($intentId);
         $this->assertInstanceOf(ChargeIntent::class, $chargeIntent);
     }
 }
