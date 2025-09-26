@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Products;
 
 final class ProductUpdateRequest implements \JsonSerializable
@@ -12,7 +14,8 @@ final class ProductUpdateRequest implements \JsonSerializable
         public readonly ?string $url = null,
         /** @var array<string,string>|null */
         public readonly ?array $metadata = null
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -22,10 +25,11 @@ final class ProductUpdateRequest implements \JsonSerializable
             'metadata' => $this->metadata,
             'shippable' => $this->shippable,
             'url' => $this->url,
-            'default_price' => $this->defaultPrice
+            'default_price' => $this->defaultPrice,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

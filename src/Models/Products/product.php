@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Products;
 
-final class Product implements \JsonSerializable {
+final class Product implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly string $name,
@@ -17,9 +20,11 @@ final class Product implements \JsonSerializable {
         public readonly int $created,
         public readonly int $updated,
         public readonly string $object
-    ){}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         return new self(
             id: $p['id'],
             name: $p['name'],
@@ -37,7 +42,8 @@ final class Product implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'name' => $this->name,

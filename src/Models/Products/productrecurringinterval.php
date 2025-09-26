@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Products;
 
-enum ProductRecurringInterval: string {
+enum ProductRecurringInterval: string
+{
     case DAILY = 'daily';
     case MONTHLY = 'monthly';
     case WEEKLY = 'weekly';

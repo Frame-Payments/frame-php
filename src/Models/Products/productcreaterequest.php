@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Products;
 
 final class ProductCreateRequest implements \JsonSerializable
@@ -14,7 +16,8 @@ final class ProductCreateRequest implements \JsonSerializable
         public readonly ?string $url = null,
         /** @var array<string,string>|null */
         public readonly ?array $metadata = null
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -26,10 +29,11 @@ final class ProductCreateRequest implements \JsonSerializable
             'recurring_interval' => $this->recurringInterval?->value,
             'shippable' => $this->shippable,
             'url' => $this->url,
-            'metadata' => $this->metadata
+            'metadata' => $this->metadata,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 
