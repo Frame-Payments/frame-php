@@ -7,7 +7,7 @@ namespace Frame\Endpoints;
 use Frame\Client;
 use Frame\Models\Invoices\Invoice;
 use Frame\Models\Invoices\InvoiceCreateRequest;
-use Frame\Models\Invoices\InvoiceDeletedResponse;
+use Frame\Models\Invoices\DeletedResponse;
 use Frame\Models\Invoices\InvoiceListResponse;
 use Frame\Models\Invoices\InvoiceStatus;
 use Frame\Models\Invoices\InvoiceUpdateRequest;
