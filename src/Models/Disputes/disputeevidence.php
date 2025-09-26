@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Disputes;
 
-final class DisputeEvidence implements \JsonSerializable {
+final class DisputeEvidence implements \JsonSerializable
+{
     public function __construct(
         public readonly ?string $accessActivityLog,
         public readonly ?string $billingAddress,
@@ -18,7 +21,8 @@ final class DisputeEvidence implements \JsonSerializable {
         public readonly ?string $refundPolicyDisclosure,
         public readonly ?string $shippingTrackingNumber,
         public readonly ?string $uncategorizedText,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $p): self
     {
@@ -40,7 +44,8 @@ final class DisputeEvidence implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'access_activity_log' => $this->accessActivityLog,
             'billing_address' => $this->billingAddress,
@@ -55,7 +60,7 @@ final class DisputeEvidence implements \JsonSerializable {
             'product_description' => $this->productDescription,
             'refund_policy_disclosure' => $this->refundPolicyDisclosure,
             'shipping_tracking_Number' => $this->shippingTrackingNumber,
-            'uncategorized_text' => $this->uncategorizedText
+            'uncategorized_text' => $this->uncategorizedText,
         ];
     }
 }

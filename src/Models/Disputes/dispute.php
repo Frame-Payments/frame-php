@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Disputes;
 
-final class Dispute implements \JsonSerializable {
+final class Dispute implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly int $amount,
@@ -16,9 +19,11 @@ final class Dispute implements \JsonSerializable {
         public readonly int $created,
         public readonly int $updated,
         public readonly string $object
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         $status = null;
         if (isset($p['status'])) {
             $status = DisputeStatus::tryFrom($p['status']);
@@ -51,7 +56,8 @@ final class Dispute implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'amount' => $this->amount,
@@ -64,7 +70,7 @@ final class Dispute implements \JsonSerializable {
             'livemode' => $this->livemode,
             'created' => $this->created,
             'updated' => $this->updated,
-            'object' => $this->object
+            'object' => $this->object,
         ];
     }
 }

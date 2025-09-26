@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\Disputes;
 
-enum DisputeReason: string {
+enum DisputeReason: string
+{
     case BANK_CANNOT_PROCESS = 'bank_cannot_process';
     case CHECK_RETURNED = 'check_returned';
     case CREDIT_NOT_PROCESSED = 'credit_not_processed';
