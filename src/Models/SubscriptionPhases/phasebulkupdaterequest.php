@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\SubscriptionPhases;
 
 final class PhaseBulkUpdateRequest implements \JsonSerializable
@@ -12,7 +14,8 @@ final class PhaseBulkUpdateRequest implements \JsonSerializable
         public readonly ?int $amountCents,
         public readonly ?float $discountPercentage,
         public readonly ?int $periodCount
-    ){}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -23,10 +26,11 @@ final class PhaseBulkUpdateRequest implements \JsonSerializable
             'pricing_type' => $this->pricingType?->value,
             'amount_cents' => $this->amountCents,
             'discount_percentage' => $this->discountPercentage,
-            'period_count' => $this->periodCount
+            'period_count' => $this->periodCount,
         ];
 
-        $filterNulls = fn($v) => $v !== null;
+        $filterNulls = fn ($v) => $v !== null;
+
         return array_filter($payload, $filterNulls);
     }
 

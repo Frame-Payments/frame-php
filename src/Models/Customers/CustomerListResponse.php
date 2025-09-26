@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Frame\Models\Customers;
 
-final class CustomerListResponse implements \JsonSerializable {
+final class CustomerListResponse implements \JsonSerializable
+{
     public function __construct(
         public readonly array $meta,
         public readonly array $customers
-    ){}
+    ) {
+    }
 
     public static function fromArray(array $p): self
     {

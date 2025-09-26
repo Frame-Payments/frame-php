@@ -1,8 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Frame\Models\SubscriptionPhases;
 
-final class SubscriptionPhase implements \JsonSerializable {
+final class SubscriptionPhase implements \JsonSerializable
+{
     public function __construct(
         public readonly string $id,
         public readonly int $ordinal,
@@ -16,9 +19,11 @@ final class SubscriptionPhase implements \JsonSerializable {
         public readonly int $created,
         public readonly int $updated,
         public readonly string $object
-    ) {}
+    ) {
+    }
 
-    public static function fromArray(array $p): self {
+    public static function fromArray(array $p): self
+    {
         $pricingType = null;
         if (isset($p['pricing_type'])) {
             $pricingType = PhasePricingType::tryFrom($p['pricing_type']);
@@ -43,7 +48,8 @@ final class SubscriptionPhase implements \JsonSerializable {
         );
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             'id' => $this->id,
             'ordinal' => $this->ordinal,
@@ -56,7 +62,7 @@ final class SubscriptionPhase implements \JsonSerializable {
             'livemode' => $this->livemode,
             'created' => $this->created,
             'updated' => $this->updated,
-            'object' => $this->object
+            'object' => $this->object,
         ];
     }
 }
