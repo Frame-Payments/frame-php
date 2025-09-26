@@ -2,10 +2,10 @@
 
 namespace Frame\Tests\Unit;
 
-use Frame\Response;
 use Frame\Exception;
-use GuzzleHttp\Psr7\Response as GuzzleResponse;
+use Frame\Response;
 use Frame\Tests\TestCase;
+use GuzzleHttp\Psr7\Response as GuzzleResponse;
 
 class ResponseTest extends TestCase
 {
@@ -13,7 +13,7 @@ class ResponseTest extends TestCase
     {
         $guzzleResponse = new GuzzleResponse(200, [], '{"success": true}');
         $response = new Response($guzzleResponse);
-        
+
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -22,7 +22,7 @@ class ResponseTest extends TestCase
         $headers = ['Content-Type' => ['application/json']];
         $guzzleResponse = new GuzzleResponse(200, $headers, '{"success": true}');
         $response = new Response($guzzleResponse);
-        
+
         $this->assertEquals($headers, $response->getHeaders());
     }
 
@@ -31,7 +31,7 @@ class ResponseTest extends TestCase
         $body = '{"success": true, "data": "test"}';
         $guzzleResponse = new GuzzleResponse(200, [], $body);
         $response = new Response($guzzleResponse);
-        
+
         $this->assertEquals($body, $response->getBody());
     }
 
@@ -40,7 +40,7 @@ class ResponseTest extends TestCase
         $body = '{"success": true, "data": {"id": 123}}';
         $guzzleResponse = new GuzzleResponse(200, [], $body);
         $response = new Response($guzzleResponse);
-        
+
         $expected = ['success' => true, 'data' => ['id' => 123]];
         $this->assertEquals($expected, $response->toArray());
     }
@@ -50,7 +50,7 @@ class ResponseTest extends TestCase
         $body = '{"success": true, "data": {"id": 123}}';
         $guzzleResponse = new GuzzleResponse(200, [], $body);
         $response = new Response($guzzleResponse);
-        
+
         $result = $response->toObject();
         $this->assertIsObject($result);
         $this->assertTrue($result->success);
@@ -61,7 +61,7 @@ class ResponseTest extends TestCase
     {
         $guzzleResponse = new GuzzleResponse(200, [], '{"success": true}');
         $response = new Response($guzzleResponse);
-        
+
         $result = $response->handleResponse();
         $this->assertInstanceOf(Response::class, $result);
     }
@@ -71,7 +71,7 @@ class ResponseTest extends TestCase
         $errorBody = '{"error": {"message": "Not found", "code": 404}}';
         $guzzleResponse = new GuzzleResponse(404, [], $errorBody);
         $response = new Response($guzzleResponse);
-        
+
         $this->expectException(Exception::class);
         $response->handleResponse();
     }
@@ -81,11 +81,11 @@ class ResponseTest extends TestCase
         $body = '{"test": "data"}';
         $guzzleResponse = new GuzzleResponse(200, [], $body);
         $response = new Response($guzzleResponse);
-        
+
         // Read body first time
         $firstRead = $response->getBody();
         $this->assertEquals($body, $firstRead);
-        
+
         // Read body second time - should work because stream was rewound
         $secondRead = $response->getBody();
         $this->assertEquals($body, $secondRead);
