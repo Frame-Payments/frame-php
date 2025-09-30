@@ -21,7 +21,7 @@ final class ChargeIntent implements \JsonSerializable
         public readonly ?string $description,
         public readonly int $amount,
         public readonly int $created,
-        public readonly ?int $updated,
+        public readonly int $updated,
         public readonly bool $livemode,
         public readonly string $object,
     ) {
@@ -48,7 +48,7 @@ final class ChargeIntent implements \JsonSerializable
             description: $p['description'] ?? null,
             amount: (int)$p['amount'],
             created: (int)$p['created'],
-            updated: (int)$p['updated'] ?? null,
+            updated: (int)$p['updated'],
             livemode: (bool)$p['livemode'],
             object: $p['object']
         );
