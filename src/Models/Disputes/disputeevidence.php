@@ -55,11 +55,11 @@ final class DisputeEvidence implements \JsonSerializable
             'customer_email_address' => $this->customerEmailAddress,
             'customer_name' => $this->customerName,
             'customer_purchase_ip' => $this->customerPurchaseIp,
-            'duplicate_charge_Explanation' => $this->duplicateChargeExplanation,
-            'duplicate_charge_Id' => $this->duplicateChargeId,
+            'duplicate_charge_explanation' => $this->duplicateChargeExplanation,
+            'duplicate_charge_id' => $this->duplicateChargeId,
             'product_description' => $this->productDescription,
             'refund_policy_disclosure' => $this->refundPolicyDisclosure,
-            'shipping_tracking_Number' => $this->shippingTrackingNumber,
+            'shipping_tracking_number' => $this->shippingTrackingNumber,
             'uncategorized_text' => $this->uncategorizedText,
         ];
     }
