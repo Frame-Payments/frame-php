@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Frame\Endpoints;
 
 use Frame\Client;
-use frame\Models\Invoices\InvoiceDeletedResponse;
+use Frame\Models\Invoices\InvoiceDeletedResponse;
 use Frame\Models\SubscriptionPhases\PhaseBulkUpdateRequest;
 use Frame\Models\SubscriptionPhases\PhaseCreateRequest;
 use Frame\Models\SubscriptionPhases\PhaseListResponse;
@@ -59,7 +59,7 @@ final class SubscriptionPhases
             }
         }
 
-        $payload = array_map(static fn (PhaseUpdateRequest $p) => $p->toArray(), $phases);
+        $payload = array_map(static fn (PhaseBulkUpdateRequest $p) => $p->toArray(), $phases);
 
         $json = Client::update(self::BASE_PATH . "/{$subscriptionId}/phases/bulk_update", ['phases' => $payload]);
 
