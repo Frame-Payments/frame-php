@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Frame\Endpoints;
 
 use Frame\Client;
+use Frame\Models\Invoices\DeletedResponse;
 use Frame\Models\Invoices\Invoice;
 use Frame\Models\Invoices\InvoiceCreateRequest;
-use Frame\Models\Invoices\InvoiceDeletedResponse;
 use Frame\Models\Invoices\InvoiceListResponse;
 use Frame\Models\Invoices\InvoiceStatus;
 use Frame\Models\Invoices\InvoiceUpdateRequest;
@@ -37,11 +37,11 @@ final class Invoices
         return Invoice::fromArray($json);
     }
 
-    public function delete(string $id): InvoiceDeletedResponse
+    public function delete(string $id): DeletedResponse
     {
         $json = Client::delete(self::BASE_PATH . "/{$id}");
 
-        return InvoiceDeletedResponse::fromArray($json);
+        return DeletedResponse::fromArray($json);
     }
 
     public function list(int $perPage = 10, int $page = 1, ?string $customer = null, ?InvoiceStatus $status = null): InvoiceListResponse
