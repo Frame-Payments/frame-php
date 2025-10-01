@@ -44,10 +44,10 @@ final class Refund implements \JsonSerializable
             status: $status,
             amount: (int)$p['amount'],
             reason: $reason,
-            chargeIntent: isset($p['charge_intent']) ? $p['charge_intent'] : null,
+            chargeIntent: $p['charge_intent'] ?? null,
             livemode: (bool)$p['livemode'],
             created: (int)$p['created'],
-            updated: isset($p['updated']) ? (int)$p['updated'] : null,
+            updated: (int)$p['updated'] ?? null,
             object: $p['object']
         );
     }
