@@ -9,7 +9,7 @@ use Frame\Models\Disputes\DisputeListResponse;
 use Frame\Tests\TestCase;
 use Mockery;
 
-class DisputeTest extends TestCase
+class DisputesTest extends TestCase
 {
     private $disputesEndpoint;
     private $mockClient;
