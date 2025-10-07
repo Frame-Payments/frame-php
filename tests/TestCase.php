@@ -75,4 +75,25 @@ abstract class TestCase extends PHPUnitTestCase
             'shipping' => null,
         ];
     }
+
+    /**
+     * Helper method to get a sample customer data array
+     */
+    protected function getSampleDisputeData(): array
+    {
+        return [
+            'id' => 'dis_test123',
+            'amount' => 2000,
+            'charge' => 'char_123',
+            'currency' => 'usd',
+            'evidence' => null,
+            'charge_intent' => 'char_intent123',
+            'reason' => 'fraudulent',
+            'status' => 'under_review',
+            'livemode' => false,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'dispute',
+        ];
+    }
 }
