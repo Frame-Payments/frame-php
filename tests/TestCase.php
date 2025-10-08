@@ -77,7 +77,7 @@ abstract class TestCase extends PHPUnitTestCase
     }
 
     /**
-     * Helper method to get a sample customer data array
+     * Helper method to get a sample dispute data array
      */
     protected function getSampleDisputeData(): array
     {
@@ -86,7 +86,7 @@ abstract class TestCase extends PHPUnitTestCase
             'amount' => 2000,
             'charge' => 'char_123',
             'currency' => 'usd',
-            'evidence' => null,
+            'evidence' => $this->getSampleDisputeEvidenceData(),
             'charge_intent' => 'char_intent123',
             'reason' => 'fraudulent',
             'status' => 'under_review',
@@ -94,6 +94,29 @@ abstract class TestCase extends PHPUnitTestCase
             'created' => 1640995200,
             'updated' => 1640995200,
             'object' => 'dispute',
+        ];
+    }
+
+    /**
+     * Helper method to get a sample dispute data array
+     */
+    protected function getSampleDisputeEvidenceData(): array
+    {
+        return [
+            'access_activity_log' => null,
+            'billing_address' => null,
+            'cancellation_policy' => null,
+            'cancellation_policy_disclosure' => null,
+            'cancellation_rebuttal' => null,
+            'customer_email_address' => null,
+            'customer_name' => null,
+            'customer_purchase_ip' => null,
+            'duplicate_charge_explanation' => null,
+            'duplicate_charge_id' => null,
+            'product_description' => null,
+            'refund_policy_disclosure' => null,
+            'shipping_tracking_number' => null,
+            'uncategorized_text' => null
         ];
     }
 }

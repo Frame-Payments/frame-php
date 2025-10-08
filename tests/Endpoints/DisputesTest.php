@@ -57,7 +57,7 @@ class DisputesTest extends TestCase
         $this->mockClient
             ->shouldReceive('get')
             ->once()
-            ->with('/v1/disputes', ['per_page' => 10, 'page' => 1])
+            ->with('/v1/disputes', ['per_page' => 10, 'page' => 1, 'charge' => null, 'charge_intent' => null])
             ->andReturn($sampleListData);
 
         $response = $this->disputesEndpoint->list();
