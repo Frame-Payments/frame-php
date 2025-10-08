@@ -4,8 +4,8 @@ namespace Frame\Tests\Endpoints;
 
 use Frame\Client;
 use Frame\Endpoints\IdentityVerifications;
-use Frame\Models\IdentityVerifications\CustomerIdentity;
 use Frame\Models\Customers\Address;
+use Frame\Models\IdentityVerifications\CustomerIdentity;
 use Frame\Models\IdentityVerifications\IdentityCreateRequest;
 use Frame\Tests\TestCase;
 use Mockery;
