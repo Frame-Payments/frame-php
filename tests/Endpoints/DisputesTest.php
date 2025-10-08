@@ -31,18 +31,18 @@ class DisputesTest extends TestCase
     public function testRetrieve()
     {
         $disputeId = 'dis_test123';
-        $sampleCustomerData = $this->getSampleDisputeData();
+        $sampleDisputeData = $this->getSampleDisputeData();
 
         $this->mockClient
             ->shouldReceive('get')
             ->once()
             ->with("/v1/disputes/{$disputeId}")
-            ->andReturn($sampleCustomerData);
+            ->andReturn($sampleDisputeData);
 
         $dispute = $this->disputesEndpoint->retrieve($disputeId);
 
         $this->assertInstanceOf(Dispute::class, $dispute);
-        $this->assertEquals($sampleCustomerData['id'], $dispute->id);
+        $this->assertEquals($sampleDisputeData['id'], $dispute->id);
 
 
     }
