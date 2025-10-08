@@ -75,4 +75,29 @@ abstract class TestCase extends PHPUnitTestCase
             'shipping' => null,
         ];
     }
+
+    /**
+     * Helper method to get a sample invoice data array
+     */
+    protected function getSampleInvoiceData(): array
+    {
+        return [
+            'id' => 'inv_123',
+            'customer' => 'cust_123',
+            'total' => 100,
+            'currency' => 'usd',
+            'status' => 'outstanding',
+            'collection_method' => 'auto_charge',
+            'net_terms' => 30,
+            'invoice_number' => '11111',
+            'description' => 'new invoice',
+            'memo' => 'memo',
+            'metadata' => [],
+            'livemode' => false,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'invoice',
+            'line_items' => $this->lineItems,
+        ];
+    }
 }
