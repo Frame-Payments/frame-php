@@ -116,7 +116,7 @@ abstract class TestCase extends PHPUnitTestCase
             'product_description' => null,
             'refund_policy_disclosure' => null,
             'shipping_tracking_number' => null,
-            'uncategorized_text' => null
+            'uncategorized_text' => null,
         ];
     }
 }
