@@ -8,13 +8,13 @@ final class InvoiceLineItem implements \JsonSerializable
 {
     public function __construct(
         public readonly string $id,
-        public readonly string $object,
         public readonly string $description,
         public readonly int $quantity,
         public readonly int $unitAmountCents,
         public readonly string $unitAmountCurrency,
         public readonly int $created,
-        public readonly int $updated
+        public readonly int $updated,
+        public readonly string $object
     ) {
     }
 
