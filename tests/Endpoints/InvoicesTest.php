@@ -4,12 +4,12 @@ namespace Frame\Tests\Endpoints;
 
 use Frame\Client;
 use Frame\Endpoints\Invoices;
+use Frame\Models\Invoices\DeletedResponse;
 use Frame\Models\Invoices\Invoice;
 use Frame\Models\Invoices\InvoiceCollectionMethod;
 use Frame\Models\Invoices\InvoiceCreateRequest;
 use Frame\Models\Invoices\InvoiceListResponse;
 use Frame\Models\Invoices\InvoiceUpdateRequest;
-use Frame\Models\Invoices\DeletedResponse;
 use Frame\Tests\TestCase;
 use Mockery;
 
