@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Frame\Endpoints;
 
 use Frame\Client;
-use Frame\Models\Invoices\InvoiceDeletedResponse;
+use Frame\Models\Invoices\DeletedResponse;
 use Frame\Models\SubscriptionPhases\PhaseBulkUpdateRequest;
 use Frame\Models\SubscriptionPhases\PhaseCreateRequest;
 use Frame\Models\SubscriptionPhases\PhaseListResponse;
@@ -44,11 +44,11 @@ final class SubscriptionPhases
         return SubscriptionPhase::fromArray($json);
     }
 
-    public function delete(string $subscriptionId, string $phaseId): InvoiceDeletedResponse
+    public function delete(string $subscriptionId, string $phaseId): DeletedResponse
     {
         $json = Client::delete(self::BASE_PATH . "/{$subscriptionId}/phases/{$phaseId}");
 
-        return InvoiceDeletedResponse::fromArray($json);
+        return DeletedResponse::fromArray($json);
     }
 
     public function bulkUpdate(string $subscriptionId, array $phases): PhaseListResponse

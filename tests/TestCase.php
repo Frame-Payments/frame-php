@@ -100,4 +100,98 @@ abstract class TestCase extends PHPUnitTestCase
             'line_items' => $this->lineItems,
         ];
     }
+
+    /**
+     * Helper method to get a sample invoice line item data array
+     */
+    protected function getSampleInvoiceLineItemData(): array
+    {
+        return [
+            'id' => 'lineItem_123',
+            'description' => 'current invoice line item',
+            'quantity' => 0,
+            'unit_amount_cents' => 0,
+            'unit_amount_currency' => 'usd',
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'invoice_line_item',
+        ];
+    }
+
+    /**
+     * Helper method to get a sample address data array
+     */
+    protected function getSampleAddressData(): array
+    {
+        return [
+            'city' => 'Los Angeles',
+            'country' => 'USA',
+            'state' => 'CA',
+            'postal_code' => '11111',
+            'line_1' => '1 Angel Way',
+            'line_2' => null,
+        ];
+    }
+
+    /**
+     * Helper method to get a sample customer identity data array
+     */
+    protected function getSampleCustomerIdentityData(): array
+    {
+        return [
+            'id' => 'cusIdentity_123',
+            'status' => 'incomplete',
+            'verification_url' => null,
+            'pending' => null,
+            'verified' => null,
+            'failed' => null,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'identity_verification',
+        ];
+    }
+
+    /**
+     * Helper method to get a sample dispute data array
+     */
+    protected function getSampleDisputeData(): array
+    {
+        return [
+            'id' => 'dis_test123',
+            'amount' => 2000,
+            'charge' => 'char_123',
+            'currency' => 'usd',
+            'evidence' => $this->getSampleDisputeEvidenceData(),
+            'charge_intent' => 'char_intent123',
+            'reason' => 'fraudulent',
+            'status' => 'under_review',
+            'livemode' => false,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'dispute',
+        ];
+    }
+
+    /**
+     * Helper method to get a sample dispute evidence data array
+     */
+    protected function getSampleDisputeEvidenceData(): array
+    {
+        return [
+            'access_activity_log' => null,
+            'billing_address' => null,
+            'cancellation_policy' => null,
+            'cancellation_policy_disclosure' => null,
+            'cancellation_rebuttal' => null,
+            'customer_email_address' => null,
+            'customer_name' => null,
+            'customer_purchase_ip' => null,
+            'duplicate_charge_explanation' => null,
+            'duplicate_charge_id' => null,
+            'product_description' => null,
+            'refund_policy_disclosure' => null,
+            'shipping_tracking_number' => null,
+            'uncategorized_text' => null,
+        ];
+    }
 }
