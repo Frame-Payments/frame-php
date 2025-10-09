@@ -92,7 +92,7 @@ abstract class TestCase extends PHPUnitTestCase
             'object' => 'invoice_line_item',
         ];
     }
-            
+
     /**
      * Helper method to get a sample address data array
      */
@@ -125,7 +125,7 @@ abstract class TestCase extends PHPUnitTestCase
             'object' => 'identity_verification',
         ];
     }
-    
+
     /**
      * Helper method to get a sample dispute data array
      */
