@@ -77,6 +77,23 @@ abstract class TestCase extends PHPUnitTestCase
     }
 
     /**
+     * Helper method to get a sample invoice line item data array
+     */
+    protected function getSampleInvoiceLineItemData(): array
+    {
+        return [
+            'id' => 'lineItem_123',
+            'description' => 'current invoice line item',
+            'quantity' => 0,
+            'unit_amount_cents' => 0,
+            'unit_amount_currency' => 'usd',
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'invoice_line_item',
+        ];
+    }
+
+    /**
      * Helper method to get a sample address data array
      */
     protected function getSampleAddressData(): array
@@ -108,7 +125,7 @@ abstract class TestCase extends PHPUnitTestCase
             'object' => 'identity_verification',
         ];
     }
-    
+
     /**
      * Helper method to get a sample dispute data array
      */

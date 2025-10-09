@@ -9,7 +9,7 @@ use Frame\Models\InvoiceLineItems\InvoiceLineItem;
 use Frame\Models\InvoiceLineItems\LineItemCreateRequest;
 use Frame\Models\InvoiceLineItems\LineItemListResponse;
 use Frame\Models\InvoiceLineItems\LineItemUpdateRequest;
-use Frame\Models\Invoices\InvoiceDeletedResponse;
+use Frame\Models\Invoices\DeletedResponse;
 
 final class InvoiceLineItems
 {
@@ -43,10 +43,10 @@ final class InvoiceLineItems
         return LineItemListResponse::fromArray($json);
     }
 
-    public function delete(string $invoiceId, string $itemId): InvoiceDeletedResponse
+    public function delete(string $invoiceId, string $itemId): DeletedResponse
     {
         $json = Client::delete(self::BASE_PATH . "/{$invoiceId}/line_items/{$itemId}");
 
-        return InvoiceDeletedResponse::fromArray($json);
+        return DeletedResponse::fromArray($json);
     }
 }
