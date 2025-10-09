@@ -77,6 +77,39 @@ abstract class TestCase extends PHPUnitTestCase
     }
 
     /**
+     * Helper method to get a sample address data array
+     */
+    protected function getSampleAddressData(): array
+    {
+        return [
+            'city' => 'Los Angeles',
+            'country' => 'USA',
+            'state' => 'CA',
+            'postal_code' => '11111',
+            'line_1' => '1 Angel Way',
+            'line_2' => null,
+        ];
+    }
+
+    /**
+     * Helper method to get a sample customer identity data array
+     */
+    protected function getSampleCustomerIdentityData(): array
+    {
+        return [
+            'id' => 'cusIdentity_123',
+            'status' => 'incomplete',
+            'verification_url' => null,
+            'pending' => null,
+            'verified' => null,
+            'failed' => null,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'identity_verification',
+        ];
+    }
+    
+    /**
      * Helper method to get a sample dispute data array
      */
     protected function getSampleDisputeData(): array
@@ -98,7 +131,7 @@ abstract class TestCase extends PHPUnitTestCase
     }
 
     /**
-     * Helper method to get a sample dispute data array
+     * Helper method to get a sample dispute evidence data array
      */
     protected function getSampleDisputeEvidenceData(): array
     {
