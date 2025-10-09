@@ -109,6 +109,7 @@ abstract class TestCase extends PHPUnitTestCase
         ];
     }
     
+    /**
      * Helper method to get a sample dispute data array
      */
     protected function getSampleDisputeData(): array
@@ -130,7 +131,7 @@ abstract class TestCase extends PHPUnitTestCase
     }
 
     /**
-     * Helper method to get a sample dispute data array
+     * Helper method to get a sample dispute evidence data array
      */
     protected function getSampleDisputeEvidenceData(): array
     {
