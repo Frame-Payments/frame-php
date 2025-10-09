@@ -97,7 +97,7 @@ abstract class TestCase extends PHPUnitTestCase
             'created' => 1640995200,
             'updated' => 1640995200,
             'object' => 'invoice',
-            'line_items' => $this->lineItems,
+            'line_items' => [],
         ];
     }
 
