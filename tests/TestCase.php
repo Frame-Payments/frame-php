@@ -106,6 +106,9 @@ abstract class TestCase extends PHPUnitTestCase
             'created' => 1640995200,
             'updated' => 1640995200,
             'object' => 'identity_verification',
+        ];
+    }
+    
      * Helper method to get a sample dispute data array
      */
     protected function getSampleDisputeData(): array
