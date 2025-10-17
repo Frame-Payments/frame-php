@@ -89,7 +89,7 @@ class InvoicesTest extends TestCase
     public function testDelete()
     {
         $invoiceId = 'inv_123';
-        $sampleInvoiceData = $this->getSampleInvoiceData();
+        $sampleInvoiceData = $this->getSampleDeletedResponse();
 
         $this->mockClient
             ->shouldReceive('delete')

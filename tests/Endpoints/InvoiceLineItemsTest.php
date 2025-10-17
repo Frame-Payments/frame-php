@@ -92,10 +92,7 @@ class InvoiceLineItemsTest extends TestCase
     {
         $invoiceId = 'invoice_123';
         $lineItemId = 'lineItem_123';
-        $sampleDeletedData = [
-            'object' => 'line_item',
-            'deleted' => true,
-        ];
+        $sampleDeletedData = $this->getSampleDeletedResponse();
 
         $this->mockClient
             ->shouldReceive('delete')

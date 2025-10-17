@@ -19,6 +19,17 @@ abstract class TestCase extends PHPUnitTestCase
     }
 
     /**
+     * Helper method to get a sample deleted responsearray
+     */
+    protected function getSampleDeletedResponse(): array
+    {
+        return [
+            'object' => 'object',
+            'deleted' => true,
+        ];
+    }
+
+    /**
      * Helper method to get a sample customer data array
      */
     protected function getSampleCustomerData(): array
@@ -226,6 +237,28 @@ abstract class TestCase extends PHPUnitTestCase
             'exp_year' => '30',
             'currency' => 'usd',
             'last_four' => '0000',
+        ];
+    }
+
+    /**
+     * Helper method to get a sample product data array
+     */
+    protected function getSampleProductData(): array
+    {
+        return [
+            'id' => 'prod_123',
+            'name' => 'New Product',
+            'image' => null,
+            'description' => 'newer product',
+            'default_price' => 100,
+            'shippable' => false,
+            'active' => true,
+            'url' => null,
+            'metadata' => [],
+            'livemode' => true,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'product',
         ];
     }
 }
