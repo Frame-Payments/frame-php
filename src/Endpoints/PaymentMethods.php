@@ -57,9 +57,9 @@ final class PaymentMethods
         return PaymentMethodListResponse::fromArray($json);
     }
 
-    public function attach(string $id): PaymentMethod
+    public function attach(string $id, string $customer): PaymentMethod
     {
-        $json = Client::post(self::BASE_PATH . "/{$id}/attach");
+        $json = Client::post(self::BASE_PATH . "/{$id}/attach", ['customer' => $customer]);
 
         return PaymentMethod::fromArray($json);
     }
