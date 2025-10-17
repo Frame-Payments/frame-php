@@ -34,7 +34,7 @@ class PaymentMethodsTest extends TestCase
 
     public function testCreateACH()
     {
-        $createRequest = new PaymentMethodCreateACHRequest(type: PaymentMethodType::CARD, customer: null, accountType: 'checking', accountNumber: 'XXXXXXXX', routingNumber: "XXXXXXXXX", billing: null);
+        $createRequest = new PaymentMethodCreateACHRequest(type: PaymentMethodType::ACH, customer: null, accountType: 'checking', accountNumber: 'XXXXXXXX', routingNumber: "XXXXXXXXX", billing: null);
         $samplePaymentMethodData = $this->getSamplePaymentMethodData();
 
         $this->mockClient

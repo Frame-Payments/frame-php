@@ -195,6 +195,9 @@ abstract class TestCase extends PHPUnitTestCase
         ];
     }
 
+    /**
+     * Helper method to get a sample payment method data array
+     */
     protected function getSamplePaymentMethodData(): array
     {
         return [
@@ -212,6 +215,9 @@ abstract class TestCase extends PHPUnitTestCase
         ];
     }
 
+    /**
+     * Helper method to get a sample payment card data array
+     */
     protected function getSamplePaymentCardData(): array
     {
         return [
