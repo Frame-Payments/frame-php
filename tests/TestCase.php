@@ -194,4 +194,38 @@ abstract class TestCase extends PHPUnitTestCase
             'uncategorized_text' => null,
         ];
     }
+
+    /**
+     * Helper method to get a sample payment method data array
+     */
+    protected function getSamplePaymentMethodData(): array
+    {
+        return [
+            'id' => 'method_123',
+            'customer' => null,
+            'billing' => $this->getSampleAddressData(),
+            'type' => 'card',
+            'livemode' => true,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'payment_method',
+            'status' => 'active',
+            'card' => $this->getSamplePaymentCardData(),
+            'ach' => null,
+        ];
+    }
+
+    /**
+     * Helper method to get a sample payment card data array
+     */
+    protected function getSamplePaymentCardData(): array
+    {
+        return [
+            'brand' => 'visa',
+            'exp_month' => '01',
+            'exp_year' => '30',
+            'currency' => 'usd',
+            'last_four' => '0000',
+        ];
+    }
 }
