@@ -51,7 +51,7 @@ class SubscriptionsTest extends TestCase
 
     public function testUpdate()
     {
-        $subscriptionId = 'inv_123';
+        $subscriptionId = 'sub_123';
         $updateRequest = new SubscriptionUpdateRequest(description: 'Updated subscription');
 
         $sampleSubscriptionData = $this->getSampleSubscriptionData();
@@ -71,7 +71,7 @@ class SubscriptionsTest extends TestCase
 
     public function testRetrieve()
     {
-        $subscriptionId = 'inv_123';
+        $subscriptionId = 'sub_123';
         $sampleSubscriptionData = $this->getSampleSubscriptionData();
 
         $this->mockClient
