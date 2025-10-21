@@ -130,7 +130,7 @@ class SubscriptionPhasesTest extends TestCase
     {
         $subscriptionId = 'sub_123';
         $updateRequest = [new PhaseBulkUpdateRequest(id: 'phase_123', name: 'New Phase'),];
-        $expectedPayload = array_map(fn(PhaseBulkUpdateRequest $p) => $p->toArray(), $updateRequest);
+        $expectedPayload = array_map(fn (PhaseBulkUpdateRequest $p) => $p->toArray(), $updateRequest);
         $sampleListData = [
             'phases' => [$this->getSamplePhaseData()],
             'meta' => ['total_count' => 1],
