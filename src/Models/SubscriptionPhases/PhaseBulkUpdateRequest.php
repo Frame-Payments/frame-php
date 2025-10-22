@@ -8,12 +8,12 @@ final class PhaseBulkUpdateRequest implements \JsonSerializable
 {
     public function __construct(
         public readonly string $id,
-        public readonly ?int $ordinal,
-        public readonly ?string $name,
-        public readonly ?PhasePricingType $pricingType,
-        public readonly ?int $amountCents,
-        public readonly ?float $discountPercentage,
-        public readonly ?int $periodCount
+        public readonly ?int $ordinal = null,
+        public readonly ?string $name = null,
+        public readonly ?PhasePricingType $pricingType = null,
+        public readonly ?int $amountCents = null,
+        public readonly ?float $discountPercentage = null,
+        public readonly ?int $periodCount = null
     ) {
     }
 

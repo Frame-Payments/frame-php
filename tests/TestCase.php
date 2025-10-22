@@ -262,6 +262,30 @@ abstract class TestCase extends PHPUnitTestCase
         ];
     }
 
+    /**
+     * Helper method to get a sample phase data array
+     */
+    protected function getSamplePhaseData(): array
+    {
+        return [
+            'id' => 'phase_123',
+            'ordinal' => 10,
+            'name' => 'New Subscription Phase',
+            'pricing_type' => 'static',
+            'amount' => 1000,
+            'currency' => 'usd',
+            'discount_percentage' => null,
+            'period_count' => null,
+            'livemode' => true,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'subscription_phase',
+          ];
+    }
+
+    /**
+     * Helper method to get a sample subscription data array
+     */
     protected function getSampleSubscriptionData(): array
     {
         return [
