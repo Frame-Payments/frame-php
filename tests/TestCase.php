@@ -262,6 +262,26 @@ abstract class TestCase extends PHPUnitTestCase
         ];
     }
 
+    protected function getSampleSubscriptionData(): array
+    {
+        return [
+            'id' => 'sub_123',
+            'description' => 'New subscription',
+            'current_period_start' => 1640995200,
+            'current_period_end' => 1640995200,
+            'livemode' => true,
+            'currency' => 'usd',
+            'status' => 'active',
+            'customer' => 'cus_123',
+            'default_payment_method' => 'method_123',
+            'metadata' => [],
+            'start_date' => 1640995200,
+            'created' => 1640995200,
+            'object' => 'subscription',
+            'plan' => null,
+          ];
+    }
+
     /**
      * Helper method to get a sample refund data array
      */
