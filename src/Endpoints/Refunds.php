@@ -13,11 +13,22 @@ final class Refunds
 {
     private const BASE_PATH = '/v1/refunds';
 
+    public function __construct(private SiftProvider $sift) {}
+
     public function create(RefundCreateRequest $params): Refund
     {
         $json = Client::post(self::BASE_PATH, $params->toArray());
+        $refund = Refund::fromArray($json);
 
-        return Refund::fromArray($json);
+        $sift = $this->sift->get();
+        $response = $sift->track('$transaction', [
+            '$transaction_id' => $refund->id,
+            '$transaction_type' => '$refund',
+            '$ip' => $sift->getClientIP(),
+        ]);
+
+
+        return $refund;
     }
 
     public function retrieve(string $id): Refund

@@ -2,12 +2,19 @@
 
 namespace Frame;
 
+use Frame\SiftProvider;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
 
 final class Client
 {
     private static $client;
+    private SiftProvider $sift;
+
+    public function __construct(private Config $config)
+    {
+        $this->sift = new SiftProvider($config);
+    }
 
     private static function getClient()
     {
@@ -71,5 +78,15 @@ final class Client
     public static function delete(string $endpoint, array $body = [])
     {
         return self::request('DELETE', $endpoint, $body);
+    }
+
+    public function chargeIntents(): ChargeIntents
+    {
+        return $this->chargeIntents ??= new ChargeIntents($this->sift);
+    }
+
+    public function refunds(): Refunds
+    {
+        return $this->refunds ??= new Refunds($this->sift);
     }
 }

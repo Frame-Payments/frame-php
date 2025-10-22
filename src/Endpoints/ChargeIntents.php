@@ -14,11 +14,22 @@ final class ChargeIntents
 {
     private const BASE_PATH = '/v1/charge_intents';
 
+    public function __construct(private SiftProvider $sift) {}
+
     public function create(ChargeIntentCreateRequest $params): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH, $params->toArray());
+        $chargeIntent = ChargeIntent::fromArray($json);
 
-        return ChargeIntent::fromArray($json);
+        $sift = $this->sift->get();
+        $response = $sift->track('$transaction', [
+            '$transaction_id' => $chargeIntent->id,
+            '$transaction_type' => '$sale',
+            '$ip' => $sift->getClientIP(),
+        ]);
+
+
+        return $chargeIntent;
     }
 
     public function update(string $id, ChargeIntentUpdateRequest $params): ChargeIntent
@@ -45,15 +56,31 @@ final class ChargeIntents
     public function confirm(string $id): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/confirm", []);
+         $chargeIntent = ChargeIntent::fromArray($json);
 
-        return ChargeIntent::fromArray($json);
+        $sift = $this->sift->get();
+        $response = $sift->track('$transaction', [
+            '$transaction_id' => $chargeIntent->id,
+            '$transaction_type' => '$authorize',
+            '$ip' => $sift->getClientIP(),
+        ]);
+
+        return $chargeIntent;
     }
 
     public function capture(string $id): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/capture", []);
+        $chargeIntent = ChargeIntent::fromArray($json);
 
-        return ChargeIntent::fromArray($json);
+        $sift = $this->sift->get();
+        $response = $sift->track('$transaction', [
+            '$transaction_id' => $chargeIntent->id,
+            '$transaction_type' => '$capture',
+            '$ip' => $sift->getClientIP(),
+        ]);
+
+        return $chargeIntent;
     }
 
     public function cancel(string $id): ChargeIntent

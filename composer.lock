@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ac4ab6406d32e048dc48cf675aadacd",
+    "content-hash": "69990de52139a9992cc0178685f6f5e9",
     "packages": [
         {
             "name": "clue/ndjson-react",
@@ -1845,6 +1845,72 @@
                 }
             ],
             "time": "2024-03-02T07:15:17+00:00"
+        },
+        {
+            "name": "siftscience/sift-php",
+            "version": "4.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SiftScience/sift-php.git",
+                "reference": "f2cdac9cdde1338ca43f89a1f8fbadca51fab7fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SiftScience/sift-php/zipball/f2cdac9cdde1338ca43f89a1f8fbadca51fab7fc",
+                "reference": "f2cdac9cdde1338ca43f89a1f8fbadca51fab7fc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Lopatin"
+                },
+                {
+                    "name": "Yoav Schatzberg"
+                },
+                {
+                    "name": "Jacob Burnim"
+                },
+                {
+                    "name": "Gary Lee"
+                },
+                {
+                    "name": "Mohammed Jouahri"
+                },
+                {
+                    "name": "Alex Paino"
+                }
+            ],
+            "description": "Sift Science PHP library",
+            "homepage": "https://github.com/SiftScience/sift-php",
+            "keywords": [
+                "fraud",
+                "php",
+                "sift",
+                "sift science"
+            ],
+            "support": {
+                "email": "support@siftscience.com",
+                "issues": "https://github.com/SiftScience/sift-php/issues",
+                "source": "https://github.com/SiftScience/sift-php/tree/v4.8.0"
+            },
+            "time": "2024-05-27T09:53:18+00:00"
         },
         {
             "name": "symfony/console",
