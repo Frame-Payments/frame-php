@@ -8,7 +8,7 @@ To install the SDK, add the following to your `composer.json` file:
 
 ```json
 "require": {
-    "frame-payments/frame-php-sdk": "^1.0"
+    "frame-payments/frame-php": "^1.0"
 }
 ```
 
