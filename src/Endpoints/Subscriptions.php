@@ -52,7 +52,7 @@ final class Subscriptions
 
     public function cancel(string $id): Subscription
     {
-        $json = Client::post(self::BASE_PATH . "/{$id}/cancel");
+        $json = Client::post(self::BASE_PATH . "/{$id}/cancel", []);
 
         return Subscription::fromArray($json);
     }

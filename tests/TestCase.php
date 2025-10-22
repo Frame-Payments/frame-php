@@ -280,6 +280,48 @@ abstract class TestCase extends PHPUnitTestCase
             'created' => 1640995200,
             'updated' => 1640995200,
             'object' => 'subscription_phase',
+          ];
+    }
+
+  /**
+     * Helper method to get a sample subscription data array
+     */
+    protected function getSampleSubscriptionData(): array
+    {
+        return [
+            'id' => 'sub_123',
+            'description' => 'New subscription',
+            'current_period_start' => 1640995200,
+            'current_period_end' => 1640995200,
+            'livemode' => true,
+            'currency' => 'usd',
+            'status' => 'active',
+            'customer' => 'cus_123',
+            'default_payment_method' => 'method_123',
+            'metadata' => [],
+            'start_date' => 1640995200,
+            'created' => 1640995200,
+            'object' => 'subscription',
+            'plan' => null,
+          ];
+    }
+
+    /**
+     * Helper method to get a sample refund data array
+     */
+    protected function getSampleRefundData(): array
+    {
+        return [
+            'id' => 'ref_123',
+            'currency' => 'usd',
+            'status' => 'pending',
+            'amount' => 100,
+            'reason' => 'fraudulent',
+            'charge_intent' => null,
+            'livemode' => true,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'refund',
         ];
     }
 }
