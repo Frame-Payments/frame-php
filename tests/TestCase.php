@@ -261,4 +261,23 @@ abstract class TestCase extends PHPUnitTestCase
             'object' => 'product',
         ];
     }
+
+    /**
+     * Helper method to get a sample refund data array
+     */
+    protected function getSampleRefundData(): array
+    {
+        return [
+            'id' => 'ref_123',
+            'currency' => 'usd',
+            'status' => 'pending',
+            'amount' => 100,
+            'reason' => 'fraudulent',
+            'charge_intent' => null,
+            'livemode' => true,
+            'created' => 1640995200,
+            'updated' => 1640995200,
+            'object' => 'refund',
+        ];
+    }
 }
