@@ -281,7 +281,7 @@ abstract class TestCase extends PHPUnitTestCase
             'plan' => null,
           ];
     }
-  
+
     /**
      * Helper method to get a sample refund data array
      */
