@@ -283,9 +283,6 @@ abstract class TestCase extends PHPUnitTestCase
           ];
     }
 
-  /**
-     * Helper method to get a sample subscription data array
-     */
     protected function getSampleSubscriptionData(): array
     {
         return [
