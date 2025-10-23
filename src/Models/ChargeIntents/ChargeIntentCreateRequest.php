@@ -13,8 +13,11 @@ final class ChargeIntentCreateRequest implements \JsonSerializable
         public readonly string $currency,
         public readonly ?string $description = null,
         public readonly ?string $customer = null,
+        public readonly ?string $paymentMethod = null,
         public readonly ?bool $confirm = null,
+        public readonly ?string $receiptEmail = null,
         public readonly ?PaymentMethodData $paymentMethodData = null,
+        public readonly ?ChargeIntentCustomerData $customerData = null,
         /** @var array<string,string>|null */
         public readonly ?array $metadata = null,
         public readonly ?AuthorizationMode $authorizationMode = null,
@@ -31,8 +34,11 @@ final class ChargeIntentCreateRequest implements \JsonSerializable
             'currency' => $this->currency,
             'description' => $this->description,
             'customer' => $this->customer,
+            'payment_method' => $this->paymentMethod,
             'confirm' => $this->confirm,
+            'receipt_email' => $this->receiptEmail,
             'payment_method_data' => $this->paymentMethodData?->toArray(),
+            'customer_data' => $this->customerData?->jsonSerialize(),
             'metadata' => $this->metadata,
             'authorization_mode' => $this->authorizationMode?->value,
         ];
