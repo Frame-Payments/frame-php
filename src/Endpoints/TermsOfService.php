@@ -15,7 +15,7 @@ final class TermsOfService
         return Client::post(self::BASE_PATH, []);
     }
 
-    public function acceptToken(string $token, ?int $acceptedAt = null, ?string $ipAddress = null, ?string $userAgent = null): array
+    public function update(string $token, ?int $acceptedAt = null, ?string $ipAddress = null, ?string $userAgent = null): array
     {
         $params = array_filter([
             'token'       => $token,
