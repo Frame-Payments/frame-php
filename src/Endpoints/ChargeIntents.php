@@ -66,6 +66,7 @@ final class ChargeIntents
     public function voidRemaining(string $id): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/void_remaining", []);
+
         return ChargeIntent::fromArray($json);
     }
 }

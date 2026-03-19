@@ -29,6 +29,7 @@ final class Disputes
     public function update(string $id, array $params): Dispute
     {
         $json = Client::update(self::BASE_PATH . "/{$id}", $params);
+
         return Dispute::fromArray($json);
     }
 
