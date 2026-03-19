@@ -18,10 +18,10 @@ final class TermsOfService
     public function update(string $token, ?int $acceptedAt = null, ?string $ipAddress = null, ?string $userAgent = null): array
     {
         $params = array_filter([
-            'token'       => $token,
+            'token' => $token,
             'accepted_at' => $acceptedAt,
-            'ip_address'  => $ipAddress,
-            'user_agent'  => $userAgent,
+            'ip_address' => $ipAddress,
+            'user_agent' => $userAgent,
         ], fn ($v) => $v !== null);
 
         return Client::update(self::BASE_PATH, $params);
