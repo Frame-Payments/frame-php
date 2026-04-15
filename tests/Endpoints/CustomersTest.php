@@ -167,4 +167,23 @@ class CustomersTest extends TestCase
         $customer = $this->customersEndpoint->unblock($customerId);
         $this->assertInstanceOf(Customer::class, $customer);
     }
+
+    public function testGetPaymentMethods()
+    {
+        $customerId = 'cus_123';
+        $responseData = [
+            'data' => [$this->getSamplePaymentMethodData()],
+            'meta' => ['total_count' => 1],
+        ];
+
+        $this->mockClient
+            ->shouldReceive('get')
+            ->once()
+            ->with("/v1/customers/{$customerId}/payment_methods", ['per_page' => 10, 'page' => 1])
+            ->andReturn($responseData);
+
+        $result = $this->customersEndpoint->getPaymentMethods($customerId);
+
+        $this->assertIsArray($result);
+    }
 }
