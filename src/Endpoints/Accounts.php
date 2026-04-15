@@ -5,34 +5,82 @@ declare(strict_types=1);
 namespace Frame\Endpoints;
 
 use Frame\Client;
+use Frame\Models\Accounts\Account;
+use Frame\Models\Accounts\AccountCreateRequest;
+use Frame\Models\Accounts\AccountListResponse;
+use Frame\Models\Accounts\AccountUpdateRequest;
+use Frame\Models\PaymentMethods\PaymentMethodListResponse;
 
 final class Accounts
 {
     private const BASE_PATH = '/v1/accounts';
 
-    public function list(int $perPage = 10, int $page = 1): array
+    public function list(int $perPage = 10, int $page = 1): AccountListResponse
     {
-        return Client::get(self::BASE_PATH, ['per_page' => $perPage, 'page' => $page]);
+        $json = Client::get(self::BASE_PATH, ['per_page' => $perPage, 'page' => $page]);
+
+        return AccountListResponse::fromArray($json);
     }
 
-    public function create(array $params): array
+    public function create(AccountCreateRequest $params): Account
     {
-        return Client::post(self::BASE_PATH, $params);
+        $json = Client::post(self::BASE_PATH, $params->toArray());
+
+        return Account::fromArray($json);
     }
 
-    public function retrieve(string $id): array
+    public function retrieve(string $id): Account
     {
-        return Client::get(self::BASE_PATH . "/{$id}");
+        $json = Client::get(self::BASE_PATH . "/{$id}");
+
+        return Account::fromArray($json);
     }
 
-    public function update(string $id, array $params): array
+    public function update(string $id, AccountUpdateRequest $params): Account
     {
-        return Client::update(self::BASE_PATH . "/{$id}", $params);
+        $json = Client::update(self::BASE_PATH . "/{$id}", $params->toArray());
+
+        return Account::fromArray($json);
     }
 
-    public function disable(string $id): array
+    public function disable(string $id): Account
     {
-        return Client::delete(self::BASE_PATH . "/{$id}");
+        $json = Client::delete(self::BASE_PATH . "/{$id}");
+
+        return Account::fromArray($json);
+    }
+
+    public function search(array $params = []): AccountListResponse
+    {
+        $json = Client::get(self::BASE_PATH . '/search', $params);
+
+        return AccountListResponse::fromArray($json);
+    }
+
+    public function restrict(string $id): Account
+    {
+        $json = Client::post(self::BASE_PATH . "/{$id}/restrict");
+
+        return Account::fromArray($json);
+    }
+
+    public function unrestrict(string $id): Account
+    {
+        $json = Client::post(self::BASE_PATH . "/{$id}/unrestrict");
+
+        return Account::fromArray($json);
+    }
+
+    public function getPlaidLinkToken(string $id): array
+    {
+        return Client::get(self::BASE_PATH . "/{$id}/plaid_link_token");
+    }
+
+    public function getPaymentMethods(string $id, int $perPage = 10, int $page = 1): PaymentMethodListResponse
+    {
+        $json = Client::get(self::BASE_PATH . "/{$id}/payment_methods", ['per_page' => $perPage, 'page' => $page]);
+
+        return PaymentMethodListResponse::fromArray($json);
     }
 
     public function geoCompliance(string $id): array
