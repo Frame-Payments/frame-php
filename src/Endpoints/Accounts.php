@@ -9,6 +9,7 @@ use Frame\Models\Accounts\Account;
 use Frame\Models\Accounts\AccountCreateRequest;
 use Frame\Models\Accounts\AccountListResponse;
 use Frame\Models\Accounts\AccountUpdateRequest;
+use Frame\Models\PaymentMethods\PaymentMethodListResponse;
 
 final class Accounts
 {
@@ -75,9 +76,11 @@ final class Accounts
         return Client::get(self::BASE_PATH . "/{$id}/plaid_link_token");
     }
 
-    public function getPaymentMethods(string $id, int $perPage = 10, int $page = 1): array
+    public function getPaymentMethods(string $id, int $perPage = 10, int $page = 1): PaymentMethodListResponse
     {
-        return Client::get(self::BASE_PATH . "/{$id}/payment_methods", ['per_page' => $perPage, 'page' => $page]);
+        $json = Client::get(self::BASE_PATH . "/{$id}/payment_methods", ['per_page' => $perPage, 'page' => $page]);
+
+        return PaymentMethodListResponse::fromArray($json);
     }
 
     public function geoCompliance(string $id): array

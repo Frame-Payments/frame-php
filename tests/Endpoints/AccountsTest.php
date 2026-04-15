@@ -9,6 +9,7 @@ use Frame\Models\Accounts\AccountCreateRequest;
 use Frame\Models\Accounts\AccountListResponse;
 use Frame\Models\Accounts\AccountType;
 use Frame\Models\Accounts\AccountUpdateRequest;
+use Frame\Models\PaymentMethods\PaymentMethodListResponse;
 use Frame\Tests\TestCase;
 use Mockery;
 
@@ -207,7 +208,8 @@ class AccountsTest extends TestCase
 
         $result = $this->accountsEndpoint->getPaymentMethods($accountId);
 
-        $this->assertIsArray($result);
+        $this->assertInstanceOf(PaymentMethodListResponse::class, $result);
+        $this->assertCount(1, $result->methods);
     }
 
     public function testGeoCompliance()

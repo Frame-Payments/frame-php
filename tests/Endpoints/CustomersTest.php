@@ -9,6 +9,7 @@ use Frame\Models\Customers\CustomerCreateRequest;
 use Frame\Models\Customers\CustomerListResponse;
 use Frame\Models\Customers\CustomerSearchRequest;
 use Frame\Models\Customers\CustomerUpdateRequest;
+use Frame\Models\PaymentMethods\PaymentMethodListResponse;
 use Frame\Tests\TestCase;
 use Mockery;
 
@@ -184,6 +185,7 @@ class CustomersTest extends TestCase
 
         $result = $this->customersEndpoint->getPaymentMethods($customerId);
 
-        $this->assertIsArray($result);
+        $this->assertInstanceOf(PaymentMethodListResponse::class, $result);
+        $this->assertCount(1, $result->methods);
     }
 }

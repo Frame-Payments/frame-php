@@ -230,6 +230,28 @@ abstract class TestCase extends PHPUnitTestCase
             'exp_year' => '30',
             'currency' => 'usd',
             'last_four' => '0000',
+            'issuer' => 'Chase',
+            'segment' => 'consumer',
+            'type' => 'debit',
+            'wallet' => null,
+        ];
+    }
+
+    /**
+     * Helper method to get a sample account-based onboarding session data array
+     */
+    protected function getSampleAccountOnboardingSessionData(): array
+    {
+        return [
+            'id' => 'acs_test123',
+            'account_id' => 'acct_test123',
+            'client_secret' => 'acs_test123_secret',
+            'return_url' => 'https://example.com/return',
+            'steps' => ['identity', 'banking'],
+            'expires_at' => 1640995200,
+            'url' => 'https://onboarding.framepayments.com/flow/abc123',
+            'livemode' => false,
+            'object' => 'onboarding_session',
         ];
     }
 
