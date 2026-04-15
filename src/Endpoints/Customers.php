@@ -70,4 +70,9 @@ final class Customers
 
         return Customer::fromArray($json);
     }
+
+    public function getPaymentMethods(string $id, int $perPage = 10, int $page = 1): array
+    {
+        return Client::get(self::BASE_PATH . "/{$id}/payment_methods", ['per_page' => $perPage, 'page' => $page]);
+    }
 }
