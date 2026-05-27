@@ -9,11 +9,17 @@ RUN apt-get update && apt-get install -y \
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
+RUN useradd --create-home --shell /bin/bash app
+
 WORKDIR /app
 
-COPY . .
+COPY --chown=app:app . .
 
 RUN composer update --no-dev --optimize-autoloader
 RUN composer install --dev
+
+RUN chown -R app:app /app
+
+USER app
 
 CMD ["./vendor/bin/phpunit"]
