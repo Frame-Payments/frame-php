@@ -26,4 +26,16 @@ final class OnboardingSessions
 
         return OnboardingSessionListResponse::fromArray($json);
     }
+
+    /**
+     * Bootstrap the embedded onboarding Web Component from a client_secret.
+     * GET /v1/onboarding_sessions/bootstrap — authenticate with the onb_sess_*
+     * token. Returns session metadata, the ordered step list, and full account
+     * context in one payload (returned raw; the account block does not map to
+     * the OnboardingSession model).
+     */
+    public function bootstrap(): array
+    {
+        return Client::get(self::BASE_PATH . '/bootstrap');
+    }
 }

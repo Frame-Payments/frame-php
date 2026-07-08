@@ -4,24 +4,27 @@ declare(strict_types=1);
 
 namespace Frame\Endpoints;
 
-use Frame\Client;
-
-final class ThreeDS
+/**
+ * @deprecated Use {@see ThreeDsIntents} (canonical resource `threeDsIntents`).
+ *   Retained as a thin alias for backward compatibility; removed at v2. Methods
+ *   forward to the canonical class; they are re-declared (rather than purely
+ *   inherited) so the surface manifest reflects the same operation set under
+ *   either class name.
+ */
+final class ThreeDS extends ThreeDsIntents
 {
-    private const BASE_PATH = '/v1/3ds/intents';
-
     public function create(array $params): array
     {
-        return Client::post(self::BASE_PATH, $params);
+        return parent::create($params);
     }
 
     public function retrieve(string $id): array
     {
-        return Client::get(self::BASE_PATH . "/{$id}");
+        return parent::retrieve($id);
     }
 
     public function resend(string $id): array
     {
-        return Client::post(self::BASE_PATH . "/{$id}/resend", []);
+        return parent::resend($id);
     }
 }

@@ -63,4 +63,29 @@ class IdentityVerificationsTest extends TestCase
         $this->assertInstanceOf(CustomerIdentity::class, $customerIdentity);
         $this->assertEquals($sampleIdentityData['id'], $customerIdentity->id);
     }
+
+    public function testCreateForCustomer()
+    {
+        $customerId = 'cus_123';
+        $sampleIdentityData = $this->getSampleCustomerIdentityData();
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with("/v1/customer_identity_verifications/{$customerId}", [])
+            ->andReturn($sampleIdentityData);
+
+        $customerIdentity = $this->identityVerificationEndpoint->createForCustomer($customerId);
+
+        $this->assertInstanceOf(CustomerIdentity::class, $customerIdentity);
+        $this->assertEquals($sampleIdentityData['id'], $customerIdentity->id);
+    }
+
+    public function testLegacyClassIsDeprecatedAliasOfCanonical()
+    {
+        $this->assertInstanceOf(
+            \Frame\Endpoints\CustomerIdentityVerifications::class,
+            new IdentityVerifications(),
+        );
+    }
 }

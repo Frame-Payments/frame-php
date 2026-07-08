@@ -4,30 +4,35 @@ declare(strict_types=1);
 
 namespace Frame\Endpoints;
 
-use Frame\Client;
 use Frame\Models\IdentityVerifications\CustomerIdentity;
 use Frame\Models\IdentityVerifications\IdentityCreateRequest;
 
-final class IdentityVerifications
+/**
+ * @deprecated Use {@see CustomerIdentityVerifications} (canonical resource
+ *   `customerIdentityVerifications`). Retained as a thin alias for backward
+ *   compatibility; removed at v2. Methods forward to the canonical class; they
+ *   are re-declared (rather than purely inherited) so the surface manifest
+ *   reflects the same operation set under either class name.
+ */
+final class IdentityVerifications extends CustomerIdentityVerifications
 {
-    private const BASE_PATH = '/v1/customer_identity_verifications';
-
     public function create(IdentityCreateRequest $params): CustomerIdentity
     {
-        $json = Client::post(self::BASE_PATH, $params->toArray());
+        return parent::create($params);
+    }
 
-        return CustomerIdentity::fromArray($json);
+    public function createForCustomer(string $customerId, array $params = []): CustomerIdentity
+    {
+        return parent::createForCustomer($customerId, $params);
     }
 
     public function retrieve(string $id): CustomerIdentity
     {
-        $json = Client::get(self::BASE_PATH . "/{$id}");
-
-        return CustomerIdentity::fromArray($json);
+        return parent::retrieve($id);
     }
 
     public function uploadDocuments(string $id, array $params): array
     {
-        return Client::post('/v1/customer_identity_verifications' . "/{$id}/upload_documents", $params);
+        return parent::uploadDocuments($id, $params);
     }
 }

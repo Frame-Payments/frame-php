@@ -71,4 +71,21 @@ class OnboardingSessionsTest extends TestCase
         $this->assertCount(1, $response->sessions);
         $this->assertEquals($sampleListData['data'][0]['id'], $response->sessions[0]->id);
     }
+
+    public function testBootstrap()
+    {
+        $sample = $this->getSampleAccountOnboardingSessionData() + [
+            'account' => ['id' => 'acct_test123', 'status' => 'active'],
+        ];
+
+        $this->mockClient
+            ->shouldReceive('get')
+            ->once()
+            ->with('/v1/onboarding_sessions/bootstrap')
+            ->andReturn($sample);
+
+        $response = $this->onboardingSessionsEndpoint->bootstrap();
+
+        $this->assertEquals('acct_test123', $response['account']['id']);
+    }
 }
