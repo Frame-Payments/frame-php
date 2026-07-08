@@ -27,7 +27,8 @@
     },
     "scripts": {
       "test": "phpunit",
-      "test-coverage": "phpunit --coverage-html coverage"
+      "test-coverage": "phpunit --coverage-html coverage",
+      "surface-manifest": "php bin/generate-surface-manifest.php"
     },
     "config": {
         "allow-plugins": {
