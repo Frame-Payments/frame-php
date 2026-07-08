@@ -21,9 +21,9 @@ final class IdentityVerifications extends CustomerIdentityVerifications
         return parent::create($params);
     }
 
-    public function createForCustomer(string $customerId, array $params = []): CustomerIdentity
+    public function createForCustomer(string $customerId): CustomerIdentity
     {
-        return parent::createForCustomer($customerId, $params);
+        return parent::createForCustomer($customerId);
     }
 
     public function retrieve(string $id): CustomerIdentity

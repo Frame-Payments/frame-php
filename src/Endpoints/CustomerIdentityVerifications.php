@@ -28,10 +28,12 @@ class CustomerIdentityVerifications
      * Create an identity verification for an existing customer.
      * POST /v1/customer_identity_verifications/{customer_id}
      * (monolith customer_identity_verifications#create_from_customer).
+     * The documented route takes only the customer_id path param — no request
+     * body — so no params argument is exposed.
      */
-    public function createForCustomer(string $customerId, array $params = []): CustomerIdentity
+    public function createForCustomer(string $customerId): CustomerIdentity
     {
-        $json = Client::post(self::BASE_PATH . "/{$customerId}", $params);
+        $json = Client::post(self::BASE_PATH . "/{$customerId}");
 
         return CustomerIdentity::fromArray($json);
     }

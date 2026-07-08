@@ -69,4 +69,24 @@ class ThreeDsIntentsTest extends TestCase
     {
         $this->assertInstanceOf(ThreeDsIntents::class, new ThreeDS());
     }
+
+    /**
+     * The deprecated ThreeDS subclass must re-declare each operation (parent::
+     * forwarder), not merely inherit it, so the surface manifest reports the op
+     * set under the deprecated key too. See the equivalent note in
+     * IdentityVerificationsTest.
+     *
+     * @dataProvider forwardedMethods
+     */
+    public function testDeprecatedSubclassDeclaresItsOwnMethods(string $method)
+    {
+        $declaring = (new \ReflectionMethod(ThreeDS::class, $method))
+            ->getDeclaringClass()->getName();
+        $this->assertEquals(ThreeDS::class, $declaring);
+    }
+
+    public static function forwardedMethods(): array
+    {
+        return [['create'], ['retrieve'], ['resend']];
+    }
 }
