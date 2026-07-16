@@ -56,4 +56,18 @@ final class Subscriptions
 
         return Subscription::fromArray($json);
     }
+
+    public function pause(string $id): Subscription
+    {
+        $json = Client::post(self::BASE_PATH . "/{$id}/pause", []);
+
+        return Subscription::fromArray($json);
+    }
+
+    public function resume(string $id): Subscription
+    {
+        $json = Client::post(self::BASE_PATH . "/{$id}/resume", []);
+
+        return Subscription::fromArray($json);
+    }
 }
