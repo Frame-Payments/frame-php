@@ -49,6 +49,23 @@ class PaymentMethodsTest extends TestCase
         $this->assertEquals($samplePaymentMethodData['id'], $paymentMethod->id);
     }
 
+    public function testCreateBankAccount()
+    {
+        $createRequest = new PaymentMethodCreateACHRequest(type: PaymentMethodType::ACH, customer: null, accountType: 'checking', accountNumber: 'XXXXXXXX', routingNumber: "XXXXXXXXX", billing: null);
+        $samplePaymentMethodData = $this->getSamplePaymentMethodData();
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with('/v1/payment_methods', $createRequest->toArray())
+            ->andReturn($samplePaymentMethodData);
+
+        $paymentMethod = $this->paymentMethodsEndpoint->createBankAccount($createRequest);
+
+        $this->assertInstanceOf(PaymentMethod::class, $paymentMethod);
+        $this->assertEquals($samplePaymentMethodData['id'], $paymentMethod->id);
+    }
+
     public function testCreateCard()
     {
         $createRequest = new PaymentMethodCreateCardRequest(type: PaymentMethodType::CARD, customer: null, cardNumber: 'XXXXXXXX', expMonth: "XX", expYear: "XX", cvc: 'XXX', billing: null);
