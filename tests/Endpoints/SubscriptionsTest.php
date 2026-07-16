@@ -137,4 +137,34 @@ class SubscriptionsTest extends TestCase
         $subscription = $this->subscriptionsEndpoint->cancel($subscriptionId);
         $this->assertInstanceOf(Subscription::class, $subscription);
     }
+
+    public function testPause()
+    {
+        $subscriptionId = 'sub_123';
+        $sampleSubscriptionData = $this->getSampleSubscriptionData();
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with("/v1/subscriptions/{$subscriptionId}/pause", [])
+            ->andReturn($sampleSubscriptionData);
+
+        $subscription = $this->subscriptionsEndpoint->pause($subscriptionId);
+        $this->assertInstanceOf(Subscription::class, $subscription);
+    }
+
+    public function testResume()
+    {
+        $subscriptionId = 'sub_123';
+        $sampleSubscriptionData = $this->getSampleSubscriptionData();
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with("/v1/subscriptions/{$subscriptionId}/resume", [])
+            ->andReturn($sampleSubscriptionData);
+
+        $subscription = $this->subscriptionsEndpoint->resume($subscriptionId);
+        $this->assertInstanceOf(Subscription::class, $subscription);
+    }
 }
