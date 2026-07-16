@@ -22,11 +22,19 @@ final class PaymentMethods
         return PaymentMethod::fromArray($json);
     }
 
-    public function createBank(PaymentMethodCreateACHRequest $params): PaymentMethod
+    public function createBankAccount(PaymentMethodCreateACHRequest $params): PaymentMethod
     {
         $json = Client::post(self::BASE_PATH, $params->toArray());
 
         return PaymentMethod::fromArray($json);
+    }
+
+    /**
+     * @deprecated Use {@see createBankAccount()} (canonical). Removed at v2.
+     */
+    public function createBank(PaymentMethodCreateACHRequest $params): PaymentMethod
+    {
+        return $this->createBankAccount($params);
     }
 
     public function update(string $id, PaymentMethodUpdateRequest $params): PaymentMethod

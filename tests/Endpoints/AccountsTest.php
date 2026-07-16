@@ -232,4 +232,25 @@ class AccountsTest extends TestCase
         $this->assertIsArray($result);
         $this->assertEquals('clear', $result['status']);
     }
+
+    public function testGetGeoCompliance()
+    {
+        $accountId = 'acct_test123';
+        $responseData = [
+            'status' => 'clear',
+            'sonar_session_id' => 'fps_123',
+            'evaluated_at' => '2024-01-01T00:00:00Z',
+        ];
+
+        $this->mockClient
+            ->shouldReceive('get')
+            ->once()
+            ->with("/v1/accounts/{$accountId}/geo_compliance")
+            ->andReturn($responseData);
+
+        $result = $this->accountsEndpoint->getGeoCompliance($accountId);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('clear', $result['status']);
+    }
 }

@@ -101,6 +101,13 @@ function isDeprecated(ReflectionMethod $method): bool
     return $doc !== false && preg_match('/@deprecated\b/', $doc) === 1;
 }
 
+function classIsDeprecated(ReflectionClass $class): bool
+{
+    $doc = $class->getDocComment();
+
+    return $doc !== false && preg_match('/@deprecated\b/', $doc) === 1;
+}
+
 /**
  * @return list<array{name: string, deprecated: bool}>
  */
@@ -136,7 +143,17 @@ function buildManifest(string $repoRoot): array
     foreach (discoverEndpointClasses($repoRoot) as $fqcn) {
         $class = new ReflectionClass($fqcn);
         $short = $class->getShortName();
-        $resources[canonicalResource($short)] = [
+        $key = canonicalResource($short);
+
+        // A canonical class and its deprecated backward-compat alias subclass
+        // (e.g. IdentityVerifications extends CustomerIdentityVerifications) map
+        // to the same canonical key. Keep the canonical class; a deprecated alias
+        // must never overwrite it (order-independent: canonical wins either way).
+        if (isset($resources[$key]) && classIsDeprecated($class)) {
+            continue;
+        }
+
+        $resources[$key] = [
             'class' => $short,
             'methods' => surfaceMethods($class),
         ];

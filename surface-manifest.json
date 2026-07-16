@@ -15,6 +15,10 @@
                 },
                 {
                     "name": "geoCompliance",
+                    "deprecated": true
+                },
+                {
+                    "name": "getGeoCompliance",
                     "deprecated": false
                 },
                 {
@@ -214,10 +218,14 @@
             ]
         },
         "customerIdentityVerifications": {
-            "class": "IdentityVerifications",
+            "class": "CustomerIdentityVerifications",
             "methods": [
                 {
                     "name": "create",
+                    "deprecated": false
+                },
+                {
+                    "name": "createForCustomer",
                     "deprecated": false
                 },
                 {
@@ -372,6 +380,15 @@
                 }
             ]
         },
+        "merchantBalance": {
+            "class": "MerchantBalance",
+            "methods": [
+                {
+                    "name": "retrieve",
+                    "deprecated": false
+                }
+            ]
+        },
         "onboarding": {
             "class": "Onboarding",
             "methods": [
@@ -400,6 +417,10 @@
         "onboardingSessions": {
             "class": "OnboardingSessions",
             "methods": [
+                {
+                    "name": "bootstrap",
+                    "deprecated": false
+                },
                 {
                     "name": "create",
                     "deprecated": false
@@ -432,6 +453,10 @@
                 },
                 {
                     "name": "createBank",
+                    "deprecated": true
+                },
+                {
+                    "name": "createBankAccount",
                     "deprecated": false
                 },
                 {
@@ -676,7 +701,7 @@
             ]
         },
         "threeDsIntents": {
-            "class": "ThreeDS",
+            "class": "ThreeDsIntents",
             "methods": [
                 {
                     "name": "create",
@@ -751,7 +776,27 @@
             "class": "WebhookEndpoints",
             "methods": [
                 {
+                    "name": "create",
+                    "deprecated": false
+                },
+                {
+                    "name": "delete",
+                    "deprecated": false
+                },
+                {
                     "name": "list",
+                    "deprecated": false
+                },
+                {
+                    "name": "retrieve",
+                    "deprecated": false
+                },
+                {
+                    "name": "rotateSecret",
+                    "deprecated": false
+                },
+                {
+                    "name": "update",
                     "deprecated": false
                 }
             ]

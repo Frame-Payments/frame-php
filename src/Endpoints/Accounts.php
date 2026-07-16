@@ -83,8 +83,16 @@ final class Accounts
         return PaymentMethodListResponse::fromArray($json);
     }
 
-    public function geoCompliance(string $id): array
+    public function getGeoCompliance(string $id): array
     {
         return Client::get(self::BASE_PATH . "/{$id}/geo_compliance");
+    }
+
+    /**
+     * @deprecated Use {@see getGeoCompliance()} (canonical). Removed at v2.
+     */
+    public function geoCompliance(string $id): array
+    {
+        return $this->getGeoCompliance($id);
     }
 }
