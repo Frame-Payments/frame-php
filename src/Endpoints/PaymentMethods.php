@@ -30,6 +30,26 @@ final class PaymentMethods
     }
 
     /**
+     * @param array<string, mixed> $params
+     */
+    public function createApplePay(array $params): PaymentMethod
+    {
+        $json = Client::post(self::BASE_PATH, $params);
+
+        return PaymentMethod::fromArray($json);
+    }
+
+    /**
+     * @param array<string, mixed> $params
+     */
+    public function createGooglePay(array $params): PaymentMethod
+    {
+        $json = Client::post(self::BASE_PATH, $params);
+
+        return PaymentMethod::fromArray($json);
+    }
+
+    /**
      * @deprecated Use {@see createBankAccount()} (canonical). Removed at v2.
      */
     public function createBank(PaymentMethodCreateACHRequest $params): PaymentMethod
