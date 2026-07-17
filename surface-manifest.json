@@ -452,6 +452,10 @@
                     "deprecated": false
                 },
                 {
+                    "name": "createApplePay",
+                    "deprecated": false
+                },
+                {
                     "name": "createBank",
                     "deprecated": true
                 },
@@ -461,6 +465,10 @@
                 },
                 {
                     "name": "createCard",
+                    "deprecated": false
+                },
+                {
+                    "name": "createGooglePay",
                     "deprecated": false
                 },
                 {

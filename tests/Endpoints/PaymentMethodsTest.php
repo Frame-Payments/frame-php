@@ -83,6 +83,50 @@ class PaymentMethodsTest extends TestCase
         $this->assertEquals($samplePaymentMethodData['id'], $paymentMethod->id);
     }
 
+    public function testCreateApplePay()
+    {
+        $createParams = [
+            'type' => 'apple_pay',
+            'customer' => null,
+            'token' => 'tok_apple_XXXX',
+            'billing' => null,
+        ];
+        $samplePaymentMethodData = $this->getSamplePaymentMethodData();
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with('/v1/payment_methods', $createParams)
+            ->andReturn($samplePaymentMethodData);
+
+        $paymentMethod = $this->paymentMethodsEndpoint->createApplePay($createParams);
+
+        $this->assertInstanceOf(PaymentMethod::class, $paymentMethod);
+        $this->assertEquals($samplePaymentMethodData['id'], $paymentMethod->id);
+    }
+
+    public function testCreateGooglePay()
+    {
+        $createParams = [
+            'type' => 'google_pay',
+            'customer' => null,
+            'token' => 'tok_google_XXXX',
+            'billing' => null,
+        ];
+        $samplePaymentMethodData = $this->getSamplePaymentMethodData();
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with('/v1/payment_methods', $createParams)
+            ->andReturn($samplePaymentMethodData);
+
+        $paymentMethod = $this->paymentMethodsEndpoint->createGooglePay($createParams);
+
+        $this->assertInstanceOf(PaymentMethod::class, $paymentMethod);
+        $this->assertEquals($samplePaymentMethodData['id'], $paymentMethod->id);
+    }
+
     public function testUpdate()
     {
         $methodId = 'method_123';
