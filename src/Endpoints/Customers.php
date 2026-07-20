@@ -37,6 +37,9 @@ final class Customers
         return Customer::fromArray($json);
     }
 
+    /**
+     * @deprecated Use {@see \Frame\Endpoints\Accounts::disable()} instead. Removed at v2.
+     */
     public function delete(string $id): Customer
     {
         $json = Client::delete(self::BASE_PATH . "/{$id}");
@@ -58,6 +61,9 @@ final class Customers
         return CustomerListResponse::fromArray($json);
     }
 
+    /**
+     * @deprecated Future target: {@see \Frame\Endpoints\Accounts}::block() (pending a monolith route). Removed at v2.
+     */
     public function block(string $id): Customer
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/block");
@@ -65,6 +71,9 @@ final class Customers
         return Customer::fromArray($json);
     }
 
+    /**
+     * @deprecated Future target: {@see \Frame\Endpoints\Accounts}::unblock() (pending a monolith route). Removed at v2.
+     */
     public function unblock(string $id): Customer
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/unblock");
@@ -72,6 +81,9 @@ final class Customers
         return Customer::fromArray($json);
     }
 
+    /**
+     * @deprecated Use PaymentMethods::list(['account_id' => ...]) instead (FRA-4461). Removed at v2.
+     */
     public function getPaymentMethods(string $id, int $perPage = 10, int $page = 1): PaymentMethodListResponse
     {
         $json = Client::get(self::BASE_PATH . "/{$id}/payment_methods", ['per_page' => $perPage, 'page' => $page]);
