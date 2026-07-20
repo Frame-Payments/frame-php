@@ -174,6 +174,23 @@ class AccountsTest extends TestCase
         $this->assertInstanceOf(Account::class, $account);
     }
 
+    public function testConfirmKycPrefill()
+    {
+        $accountId = 'acct_test123';
+        $sampleAccountData = $this->getSampleAccountData();
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with("/v1/accounts/{$accountId}/kyc_prefill/confirm", [])
+            ->andReturn($sampleAccountData);
+
+        $account = $this->accountsEndpoint->confirmKycPrefill($accountId);
+
+        $this->assertInstanceOf(Account::class, $account);
+        $this->assertEquals($sampleAccountData['id'], $account->id);
+    }
+
     public function testGetPlaidLinkToken()
     {
         $accountId = 'acct_test123';

@@ -71,6 +71,13 @@ final class Accounts
         return Account::fromArray($json);
     }
 
+    public function confirmKycPrefill(string $id): Account
+    {
+        $json = Client::post(self::BASE_PATH . "/{$id}/kyc_prefill/confirm", []);
+
+        return Account::fromArray($json);
+    }
+
     public function getPlaidLinkToken(string $id): array
     {
         return Client::get(self::BASE_PATH . "/{$id}/plaid_link_token");
