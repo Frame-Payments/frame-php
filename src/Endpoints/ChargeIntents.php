@@ -14,6 +14,9 @@ final class ChargeIntents
 {
     private const BASE_PATH = '/v1/charge_intents';
 
+    /**
+     * @deprecated Use {@see \Frame\Endpoints\Transfers::create()} instead. Removed at v2.
+     */
     public function create(ChargeIntentCreateRequest $params): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH, $params->toArray());
@@ -21,6 +24,9 @@ final class ChargeIntents
         return ChargeIntent::fromArray($json);
     }
 
+    /**
+     * @deprecated Removed at v2. No canonical transfer equivalent yet (FRA-4463).
+     */
     public function update(string $id, ChargeIntentUpdateRequest $params): ChargeIntent
     {
         $json = Client::update(self::BASE_PATH . "/{$id}", $params->toArray());
@@ -28,6 +34,9 @@ final class ChargeIntents
         return ChargeIntent::fromArray($json);
     }
 
+    /**
+     * @deprecated Use {@see \Frame\Endpoints\Transfers::retrieve()} instead. Removed at v2.
+     */
     public function retrieve(string $id): ChargeIntent
     {
         $json = Client::get(self::BASE_PATH . "/{$id}");
@@ -35,6 +44,9 @@ final class ChargeIntents
         return ChargeIntent::fromArray($json);
     }
 
+    /**
+     * @deprecated Use {@see \Frame\Endpoints\Transfers::list()} instead. Removed at v2.
+     */
     public function list(int $perPage = 10, int $page = 1): ChargeIntentListResponse
     {
         $json = Client::get(self::BASE_PATH, ['per_page' => $perPage, 'page' => $page]);
@@ -42,6 +54,9 @@ final class ChargeIntents
         return ChargeIntentListResponse::fromArray($json);
     }
 
+    /**
+     * @deprecated Use {@see \Frame\Endpoints\Transfers::confirm()} instead. Removed at v2.
+     */
     public function confirm(string $id): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/confirm", []);
@@ -49,6 +64,9 @@ final class ChargeIntents
         return ChargeIntent::fromArray($json);
     }
 
+    /**
+     * @deprecated Removed at v2. No canonical transfer equivalent yet (FRA-4463).
+     */
     public function capture(string $id): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/capture", []);
@@ -56,6 +74,9 @@ final class ChargeIntents
         return ChargeIntent::fromArray($json);
     }
 
+    /**
+     * @deprecated Removed at v2. No canonical transfer equivalent yet (FRA-4463).
+     */
     public function cancel(string $id): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/cancel", []);
@@ -63,6 +84,9 @@ final class ChargeIntents
         return ChargeIntent::fromArray($json);
     }
 
+    /**
+     * @deprecated Removed at v2. No canonical transfer equivalent yet (FRA-4463).
+     */
     public function voidRemaining(string $id): ChargeIntent
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/void_remaining", []);

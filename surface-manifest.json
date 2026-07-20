@@ -171,35 +171,35 @@
             "methods": [
                 {
                     "name": "cancel",
-                    "deprecated": false
+                    "deprecated": true
                 },
                 {
                     "name": "capture",
-                    "deprecated": false
+                    "deprecated": true
                 },
                 {
                     "name": "confirm",
-                    "deprecated": false
+                    "deprecated": true
                 },
                 {
                     "name": "create",
-                    "deprecated": false
+                    "deprecated": true
                 },
                 {
                     "name": "list",
-                    "deprecated": false
+                    "deprecated": true
                 },
                 {
                     "name": "retrieve",
-                    "deprecated": false
+                    "deprecated": true
                 },
                 {
                     "name": "update",
-                    "deprecated": false
+                    "deprecated": true
                 },
                 {
                     "name": "voidRemaining",
-                    "deprecated": false
+                    "deprecated": true
                 }
             ]
         },
@@ -807,6 +807,10 @@
         "transfers": {
             "class": "Transfers",
             "methods": [
+                {
+                    "name": "confirm",
+                    "deprecated": false
+                },
                 {
                     "name": "create",
                     "deprecated": false

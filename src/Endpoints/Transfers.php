@@ -24,4 +24,9 @@ final class Transfers
     {
         return Client::post(self::BASE_PATH, $params);
     }
+
+    public function confirm(string $id): array
+    {
+        return Client::post(self::BASE_PATH . "/{$id}/confirm", []);
+    }
 }
