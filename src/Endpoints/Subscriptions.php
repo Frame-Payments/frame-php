@@ -70,4 +70,11 @@ final class Subscriptions
 
         return Subscription::fromArray($json);
     }
+
+    public function cancelScheduledChange(string $id): Subscription
+    {
+        $json = Client::delete(self::BASE_PATH . "/{$id}/scheduled_change");
+
+        return Subscription::fromArray($json);
+    }
 }

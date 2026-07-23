@@ -7,6 +7,7 @@ use Frame\Endpoints\Subscriptions;
 use Frame\Models\Subscriptions\Subscription;
 use Frame\Models\Subscriptions\SubscriptionCreateRequest;
 use Frame\Models\Subscriptions\SubscriptionListResponse;
+use Frame\Models\Subscriptions\SubscriptionScheduledChange;
 use Frame\Models\Subscriptions\SubscriptionSearchRequest;
 use Frame\Models\Subscriptions\SubscriptionStatus;
 use Frame\Models\Subscriptions\SubscriptionUpdateRequest;
@@ -166,5 +167,37 @@ class SubscriptionsTest extends TestCase
 
         $subscription = $this->subscriptionsEndpoint->resume($subscriptionId);
         $this->assertInstanceOf(Subscription::class, $subscription);
+    }
+
+    public function testCancelScheduledChange()
+    {
+        $subscriptionId = 'sub_123';
+        $sampleSubscriptionData = $this->getSampleSubscriptionData();
+
+        $this->mockClient
+            ->shouldReceive('delete')
+            ->once()
+            ->with("/v1/subscriptions/{$subscriptionId}/scheduled_change")
+            ->andReturn($sampleSubscriptionData);
+
+        $subscription = $this->subscriptionsEndpoint->cancelScheduledChange($subscriptionId);
+        $this->assertInstanceOf(Subscription::class, $subscription);
+        $this->assertNull($subscription->scheduledChange);
+    }
+
+    public function testSubscriptionHydratesScheduledChange()
+    {
+        $sampleSubscriptionData = $this->getSampleSubscriptionData();
+        $sampleSubscriptionData['scheduled_change'] = $this->getSampleScheduledChangeData();
+
+        $subscription = Subscription::fromArray($sampleSubscriptionData);
+
+        $this->assertInstanceOf(SubscriptionScheduledChange::class, $subscription->scheduledChange);
+        $this->assertEquals('ssc_123', $subscription->scheduledChange->id);
+        $this->assertEquals('subscription_scheduled_change', $subscription->scheduledChange->object);
+        $this->assertEquals('prod_123', $subscription->scheduledChange->product);
+        $this->assertTrue($subscription->scheduledChange->intervalSwitch);
+        $this->assertEquals(1640995200, $subscription->scheduledChange->effectiveDate);
+        $this->assertEquals(1640995200, $subscription->scheduledChange->created);
     }
 }

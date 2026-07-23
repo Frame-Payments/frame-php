@@ -331,6 +331,21 @@ abstract class TestCase extends PHPUnitTestCase
     }
 
     /**
+     * Helper method to get a sample subscription scheduled change data array
+     */
+    protected function getSampleScheduledChangeData(): array
+    {
+        return [
+            'id' => 'ssc_123',
+            'object' => 'subscription_scheduled_change',
+            'product' => 'prod_123',
+            'interval_switch' => true,
+            'effective_date' => 1640995200,
+            'created' => 1640995200,
+        ];
+    }
+
+    /**
      * Helper method to get a sample account data array
      */
     protected function getSampleAccountData(): array

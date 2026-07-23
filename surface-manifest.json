@@ -1,6 +1,6 @@
 {
     "sdk": "frame-php",
-    "version": "1.0.11",
+    "version": "1.1.1",
     "resources": {
         "accounts": {
             "class": "Accounts",
@@ -721,6 +721,10 @@
             "methods": [
                 {
                     "name": "cancel",
+                    "deprecated": false
+                },
+                {
+                    "name": "cancelScheduledChange",
                     "deprecated": false
                 },
                 {
