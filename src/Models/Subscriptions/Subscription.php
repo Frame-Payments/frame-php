@@ -32,6 +32,7 @@ final class Subscription implements \JsonSerializable
         public readonly int $startDate,
         public readonly int $created,
         public readonly string $object,
+        public readonly ?SubscriptionScheduledChange $scheduledChange,
     ) {
     }
 
@@ -73,6 +74,9 @@ final class Subscription implements \JsonSerializable
             startDate: (int)$p['start_date'],
             created: (int)$p['created'],
             object: $p['object'],
+            scheduledChange: isset($p['scheduled_change']) && is_array($p['scheduled_change'])
+                ? SubscriptionScheduledChange::fromArray($p['scheduled_change'])
+                : null,
         );
     }
 
@@ -102,6 +106,7 @@ final class Subscription implements \JsonSerializable
             'created' => $this->created,
             'object' => $this->object,
             'plan' => $this->plan,
+            'scheduled_change' => $this->scheduledChange,
         ];
     }
 }
