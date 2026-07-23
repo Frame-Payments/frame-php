@@ -1,6 +1,6 @@
 {
     "sdk": "frame-php",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "resources": {
         "accounts": {
             "class": "Accounts",
