@@ -25,9 +25,12 @@ final class Client
         return self::$client;
     }
 
-    private static function request(string $method, string $endpoint, array $body = [])
+    private static function request(string $method, string $endpoint, array $body = [], array $headers = [])
     {
         $options = [];
+        if (! empty($headers)) {
+            $options['headers'] = $headers;
+        }
         if (! empty($body)) {
             if ($method === 'GET') {
                 $options['query'] = $body;
@@ -53,23 +56,23 @@ final class Client
         }
     }
 
-    public static function post(string $endpoint, array $body = [])
+    public static function post(string $endpoint, array $body = [], array $headers = [])
     {
-        return self::request('POST', $endpoint, $body);
+        return self::request('POST', $endpoint, $body, $headers);
     }
 
-    public static function get(string $endpoint, array $query = [])
+    public static function get(string $endpoint, array $query = [], array $headers = [])
     {
-        return self::request('GET', $endpoint, $query);
+        return self::request('GET', $endpoint, $query, $headers);
     }
 
-    public static function update(string $endpoint, array $body = [])
+    public static function update(string $endpoint, array $body = [], array $headers = [])
     {
-        return self::request('PATCH', $endpoint, $body);
+        return self::request('PATCH', $endpoint, $body, $headers);
     }
 
-    public static function delete(string $endpoint, array $body = [])
+    public static function delete(string $endpoint, array $body = [], array $headers = [])
     {
-        return self::request('DELETE', $endpoint, $body);
+        return self::request('DELETE', $endpoint, $body, $headers);
     }
 }
