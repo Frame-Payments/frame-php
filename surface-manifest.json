@@ -18,6 +18,10 @@
                     "deprecated": false
                 },
                 {
+                    "name": "electPayoutMethod",
+                    "deprecated": false
+                },
+                {
                     "name": "geoCompliance",
                     "deprecated": true
                 },
@@ -171,6 +175,10 @@
                 },
                 {
                     "name": "list",
+                    "deprecated": false
+                },
+                {
+                    "name": "reactivate",
                     "deprecated": false
                 },
                 {
@@ -829,11 +837,19 @@
             "class": "Transfers",
             "methods": [
                 {
+                    "name": "approve",
+                    "deprecated": false
+                },
+                {
                     "name": "confirm",
                     "deprecated": false
                 },
                 {
                     "name": "create",
+                    "deprecated": false
+                },
+                {
+                    "name": "fraud_decline",
                     "deprecated": false
                 },
                 {
@@ -879,6 +895,27 @@
                 },
                 {
                     "name": "void",
+                    "deprecated": false
+                }
+            ]
+        },
+        "wallets": {
+            "class": "Wallets",
+            "methods": [
+                {
+                    "name": "list",
+                    "deprecated": false
+                },
+                {
+                    "name": "retrieve",
+                    "deprecated": false
+                },
+                {
+                    "name": "retrieve_default",
+                    "deprecated": false
+                },
+                {
+                    "name": "update",
                     "deprecated": false
                 }
             ]

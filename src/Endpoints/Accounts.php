@@ -71,6 +71,15 @@ final class Accounts
         return Account::fromArray($json);
     }
 
+    public function electPayoutMethod(string $id, string $paymentMethodId): Account
+    {
+        $json = Client::post(self::BASE_PATH . "/{$id}/elect_payout_method", [
+            'payment_method_id' => $paymentMethodId,
+        ]);
+
+        return Account::fromArray($json);
+    }
+
     public function confirmKycPrefill(string $id): Account
     {
         $json = Client::post(self::BASE_PATH . "/{$id}/kyc_prefill/confirm", []);

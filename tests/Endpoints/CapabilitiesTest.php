@@ -89,4 +89,20 @@ class CapabilitiesTest extends TestCase
 
         $this->assertEquals('capability', $response['object']);
     }
+
+    public function testReactivate()
+    {
+        $reactivated = $this->sampleCapability();
+        $reactivated['status'] = 'pending';
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with('/v1/accounts/acct_123/capabilities/payments/reactivate')
+            ->andReturn($reactivated);
+
+        $response = $this->endpoint->reactivate('acct_123', 'payments');
+
+        $this->assertEquals('pending', $response['status']);
+    }
 }

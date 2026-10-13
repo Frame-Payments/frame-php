@@ -105,4 +105,40 @@ class TransfersTest extends TestCase
         $this->assertIsArray($response);
         $this->assertEquals('confirmed', $response['status']);
     }
+
+    public function testApprove()
+    {
+        $transferId = 'tr_123';
+        $params = ['liability_acknowledged' => true];
+        $approved = $this->sampleTransfer();
+        $approved['status'] = 'succeeded';
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with("/v1/transfers/{$transferId}/approve", $params)
+            ->andReturn($approved);
+
+        $response = $this->endpoint->approve($transferId, $params);
+
+        $this->assertEquals('succeeded', $response['status']);
+    }
+
+    public function testFraudDecline()
+    {
+        $transferId = 'tr_123';
+        $params = ['reason' => 'suspected_fraud'];
+        $declined = $this->sampleTransfer();
+        $declined['status'] = 'fraud_declined';
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with("/v1/transfers/{$transferId}/fraud_decline", $params)
+            ->andReturn($declined);
+
+        $response = $this->endpoint->fraud_decline($transferId, $params);
+
+        $this->assertEquals('fraud_declined', $response['status']);
+    }
 }
