@@ -29,4 +29,20 @@ final class Transfers
     {
         return Client::post(self::BASE_PATH . "/{$id}/confirm", []);
     }
+
+    /**
+     * @param array<string, mixed> $params
+     */
+    public function approve(string $id, array $params): array
+    {
+        return Client::post(self::BASE_PATH . "/{$id}/approve", $params);
+    }
+
+    /**
+     * @param array<string, mixed> $params
+     */
+    public function fraud_decline(string $id, array $params): array
+    {
+        return Client::post(self::BASE_PATH . "/{$id}/fraud_decline", $params);
+    }
 }

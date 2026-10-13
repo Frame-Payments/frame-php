@@ -191,6 +191,23 @@ class AccountsTest extends TestCase
         $this->assertEquals($sampleAccountData['id'], $account->id);
     }
 
+    public function testElectPayoutMethod()
+    {
+        $accountId = 'acct_test123';
+        $sampleAccountData = $this->getSampleAccountData();
+
+        $this->mockClient
+            ->shouldReceive('post')
+            ->once()
+            ->with("/v1/accounts/{$accountId}/elect_payout_method", ['payment_method_id' => 'pm_123'])
+            ->andReturn($sampleAccountData);
+
+        $account = $this->accountsEndpoint->electPayoutMethod($accountId, 'pm_123');
+
+        $this->assertInstanceOf(Account::class, $account);
+        $this->assertEquals($sampleAccountData['id'], $account->id);
+    }
+
     public function testGetPlaidLinkToken()
     {
         $accountId = 'acct_test123';

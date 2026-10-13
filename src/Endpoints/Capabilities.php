@@ -27,4 +27,9 @@ final class Capabilities
     {
         return Client::delete("/v1/accounts/{$accountId}/capabilities/{$name}");
     }
+
+    public function reactivate(string $accountId, string $name): array
+    {
+        return Client::post("/v1/accounts/{$accountId}/capabilities/{$name}/reactivate");
+    }
 }
